@@ -1,0 +1,536 @@
+const OTP = require("../models/otp");
+const User = require("../models/user");
+const otpGenerator = require("otp-generator");
+const bacrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { fileUpload } = require("../utils/cloudUplod");
+
+
+// create and send otp
+exports.createOpt = async(req,res)=>{
+  try {
+
+    // fetch email
+    const {email} = req.body;
+
+    // validation 
+    if(!email){
+        return res.status(400).json({
+            success:false,
+            message:"please fill all the input fileds",
+        });
+    }
+
+    // check is user allready have an account
+    const userDetails = await User.findOne({email:email});
+
+    if(userDetails){
+        return res.status(400).json({
+            success:false,
+            message:"User allready have an account",
+        })
+    }
+     
+    // generate otp
+const newOtp = otpGenerator.generate(4, {
+  upperCaseAlphabets: false,
+  lowerCaseAlphabets: false,
+  specialChars: false,
+ 
+});
+
+
+    // create entry in db
+    const newOpt = await OTP.create({
+        email:email,
+        otp:newOtp,
+    });
+
+
+    // return response
+    return res.status(200).json({
+        success:true,
+        message:"Otp send successfully",
+        newOpt,      
+    });
+
+  
+    } catch (error) {
+       console.log(error);
+       return res.status(500).json({
+        success:false,
+        message:"Internal Setver error",
+       })
+        
+    }
+
+}
+
+
+// Sign Up
+exports.signUp =async(req,res)=>{
+    try {
+        // fetch data
+        const {firstName,lastName,password,confirmPassword,otp,email} = req.body;
+
+        // validation
+        if(!firstName || !lastName || !password || !confirmPassword || !otp || !email){
+            return res.status(400).json({
+                success:false,
+                message:"Please fill all the input fields.",
+            })
+        }
+        
+        // check password and confirmPassword is same or not
+        if(password !== confirmPassword){
+         return res.status(400).json({
+            success:false,
+            message:"Password and confirmPassword not matched."
+         })
+        }
+
+
+        // check user allready registered or not
+        const userExistence = await User.findOne({email:email});
+
+        if(userExistence){
+            return res.status(400).json({
+                success:false,
+                message:"User allready registered"
+            })
+        }
+
+        // find latest otp
+        const latestOtp = await OTP.findOne({email:email}).sort({createdAt:-1});
+
+        if(!latestOtp){
+            return res.status(404).json({
+                success:false,
+                message:"Otp not found"
+            })
+        }
+
+        // verfiy otp
+        if(otp !== latestOtp.otp){
+            return res.status(400).json({
+                success:false,
+                message:"Otp not matched"
+            })
+        }
+
+      
+        // hash the password
+        const hashedPassword = await bacrypt.hash(password,10);
+
+        // careate profile picture
+        const profilePicture =  await `https://api.dicebear.com/7.x/initials/svg?seed=${firstName}%20${lastName}`
+        
+
+
+        // create entry in db
+        const newUser = await User.create({
+            firstName:firstName,
+            lastName:lastName,
+            email:email,
+            password:hashedPassword,
+            profilePicture:profilePicture,
+        })
+
+        // return response
+        return res.status(200).json({
+            success:true,
+            message:"Account created successfully",
+            newUser:newUser,
+        })
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"Internal Server error",
+        })
+        
+    }
+}
+
+
+// login
+exports.login = async(req,res)=>{
+    try {
+        // fetch data
+        const {email,password} = req.body;
+
+        // validation
+        if(!email || !password){
+            return res.status(400).json({
+                success:false,
+                message:"Please fill all the input fields",
+            })
+        }
+
+        // check is email regeistered or not
+        const userDeatails = await User.findOne({email:email});
+
+        if(!userDeatails){
+            return res.status(404).json({
+                success:false,
+                message:"email not registered",
+            })
+        }
+
+        // check password
+        const isMatched = await bacrypt.compare(password,userDeatails.password);
+
+        // password sahi hai
+        if(isMatched){
+
+            const payload = {
+                userId:userDeatails._id,
+                userEmail:userDeatails.email,
+            }
+         
+            // create token
+            const token = jwt.sign(payload,"sourabh",{
+                expiresIn:"1y"
+            });
+
+        userDeatails.password = undefined;
+
+            // return response
+            return res.status(200).json({
+                success:true,
+                message:"Login successfully",
+                userDeatails:userDeatails,
+                token:token,
+            })
+        }
+
+        // password galat hai 
+        else{
+            return res.status(403).json({
+                success:false,
+                message:"Password not matched"
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"Internal server error",
+        })
+        
+    }
+}
+
+
+
+// send otp for reset password
+exports.sendOtpforgotPassword = async(req,res)=>{
+  try {
+
+    // fetch email
+    const {email} = req.body;
+
+    // validation 
+    if(!email){
+        return res.status(400).json({
+            success:false,
+            message:"please fill all the input fileds",
+        });
+    }
+
+    // check is user allready have an account
+    const userDetails = await User.findOne({email:email});
+
+    if(!userDetails){
+        return res.status(400).json({
+            success:false,
+            message:"User not registered",
+        })
+    }
+     
+    // generate otp
+const newOtp = otpGenerator.generate(4, {
+  upperCaseAlphabets: false,
+  lowerCaseAlphabets: false,
+  specialChars: false,
+ 
+});
+
+
+    // create entry in db
+    const newOpt = await OTP.create({
+        email:email,
+        otp:newOtp,
+    });
+
+
+    // return response
+    return res.status(200).json({
+        success:true,
+        message:"Otp send successfully",
+        newOpt,      
+    });
+
+  
+    } catch (error) {
+       console.log(error);
+       return res.status(500).json({
+        success:false,
+        message:"Internal Setver error",
+       })
+        
+    }
+
+}
+
+
+// verify otp
+exports.forgotPasswordOtpVerifiy = async(req,res)=>{
+
+    try {
+
+        // fetch data
+        const {otp,email} = req.body;
+
+        // validation
+        if(!otp){
+            return res.status(400).json({
+                success:false,
+                message:"Please fill th otp"
+            })
+        }
+          if(!email){
+            return res.status(400).json({
+                success:false,
+                message:"something went wrong"
+            })
+        }
+
+
+        // find latest opt
+        const latestOtp = await OTP.findOne({email:email}).sort({createdAt:-1});
+
+        if(!latestOtp){
+            return res.status(404).json({
+                success:false,
+                message:"Otp expires"
+            })
+        }
+
+
+        // verify the otp
+        if(latestOtp.otp !== otp){
+            return res.status(403).json({
+                success:false,
+                message:"Otp not matched",
+            })
+        }
+
+
+        // return response
+        return res.status(200).json({
+            success:true,
+            message:"Otp matched successfully"
+        })
+
+
+        
+    } catch (error) {
+       console.log(error);
+       return res.status(500).json({
+        success:false,
+        message:"Internal Server error",
+       })
+        
+    }
+
+}
+
+
+// reset password
+exports.resetPassword = async(req,res)=>{
+    try {
+        
+        // fetch data
+        const {password,confirmPassword,email} = req.body;
+
+        // validation
+        if(!password || !confirmPassword || !email){
+            return res.status(400).json({
+                success:false,
+                message:"Please fill all the input fields"
+            })
+        }
+        
+        // check password and confirm is same or not
+        if(password !== confirmPassword){
+            return res.status(400).json({
+                success:false,
+                message:"Password and confirmPassword not matched",
+
+            })
+        }
+
+        // hash the password
+        const hashedPassword = await bacrypt.hash(password,10);
+
+        // update password
+        const updatedUser = await User.findOneAndUpdate({email:email},{
+            password:hashedPassword,
+        },{new:true});
+
+        // return response
+        return res.status(200).json({
+            success:true,
+            message:"Password updated successfully",
+        })
+    } catch (error) {
+       console.log(error);
+       return res.status(500).json({
+        success:false,
+        message:"Internal Server error",
+       })
+        
+    }
+}
+
+
+// update profile picture
+exports.updateProfilePicture = async(req,res)=>{
+    try {
+        const {image} = req.files;
+
+        if(!image){
+            return res.status(400).json({
+                success:false,
+                message:"Please select the image",
+            })
+        }
+
+        const userId = req.body.userId;
+
+        if(!userId){
+            return res.status(400).json({
+                success:false,
+                message:"something went wrong",
+            })
+        }
+
+        // upload image to the cloudinary
+        const uploadImage = await fileUpload(image,"sourabh");
+
+        // update profile picture
+        const updateUser = await User.findByIdAndUpdate(userId,{
+            profilePicture:uploadImage.secure_url,
+        },{new:true}).select("-password");
+
+        // return response
+        return res.status(200).json({
+            success:true,
+            message:"Profile picture updated successfully",
+            updateUser:updateUser,
+        })
+        
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success:false,
+        message:"Internal Server error",
+      })
+        
+    }
+}
+
+
+// update firstName and lastName
+exports.nameUpdate = async(req,res)=>{
+    try {
+        // fetch data
+        const {firstName,lastName,userId} = req.body;
+
+        // validation
+        if(!firstName || !lastName || !userId){
+            return res.status(400).json({
+                success:false,
+                message:"Please fill all the input fields",
+            })
+        }
+
+        // update user Name
+        const updateUser = await User.findByIdAndUpdate(userId,{
+            firstName:firstName,
+            lastName:lastName,
+        },{new:true}).select("-password");
+
+        // return response
+        return res.status(200).json({
+            success:true,
+            message:"Name updated Successfully",
+            updateUser:updateUser,
+        });
+        
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success:false,
+        message:"Internal Server error",
+      })
+        
+    }
+}
+
+// update password
+exports.passwordUpdate = async(req,res)=>{
+    try {
+        // fetch data
+        const {currentPassword,changePassword,userId} = req.body;
+
+        // validation
+        if(!currentPassword || !changePassword || !userId){
+            return res.status(400).json({
+                success:false,
+                message:"Please fill all the input fields",
+            })
+        }
+        
+        // find userDeatails
+        const userDetails = await User.findById(userId);
+
+        // match currentPassword
+
+        const isMatched = await bacrypt.compare(currentPassword,userDetails.password);
+
+        if(!isMatched){
+           return res.status(400).json({
+            success:false,
+            message:"Current Password not matched",
+           })
+        }
+
+        // hash the changePassword
+        const hashedPassword  = await bacrypt.hash(changePassword,10);
+
+        // update the password
+        const updatedUser =  await User.findByIdAndUpdate(userId,{
+            password:hashedPassword,
+        },{new:true});
+
+        // return response
+        return res.status(200).json({
+            success:true,
+            message:"Password updated successfully",
+        })        
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success:false,
+        message:"Internal Server error",
+      })
+        
+    }
+}
+
+
+
+
