@@ -1,7 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const getStoredToken = () => {
+    const rawToken = localStorage.getItem("token");
+
+    if (!rawToken) return null;
+
+    try {
+        return JSON.parse(rawToken);
+    } catch {
+        // Backward compatibility for previously saved plain JWT strings.
+        return rawToken;
+    }
+};
+
 const initialState = {
-    token:localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null,
+    token: getStoredToken(),
 }
 
 export const authSlice = createSlice({
@@ -10,7 +23,12 @@ export const authSlice = createSlice({
     reducers:{
         setToken:(state,value)=>{
             state.token = value.payload;
-            localStorage.setItem("token",JSON.stringify(state.token));
+            if (typeof state.token === "string") {
+                localStorage.setItem("token", state.token);
+                return;
+            }
+
+            localStorage.setItem("token", JSON.stringify(state.token));
         },
         removeToken:(state)=>{
             state.token = null;

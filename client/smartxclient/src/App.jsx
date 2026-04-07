@@ -40,28 +40,28 @@ const App = () => {
 
   const router = createBrowserRouter([
     {
-      path:"/",element:<><Navbar/><Home/></>
+      path:"/",element:<><Navbar/><Home/><Footer/></>
     },
     {
-      path:"/signup",element:<><Navbar/><SignUp/></>
+      path:"/signup",element:<><Navbar/><SignUp/><Footer/></>
     },
     {
-      path:"/otp",element:<><Navbar/><Otp/></>
+      path:"/otp",element:<><Navbar/><Otp/><Footer/></>
     },
     {
-      path:"/login",element:<><Navbar/><Login/></>
+      path:"/login",element:<><Navbar/><Login/><Footer/></>
     },
     {
-      path:"/forgot-password",element:<><Navbar/><ForgotPassword/></>
+      path:"/forgot-password",element:<><Navbar/><ForgotPassword/><Footer/></>
     },
     {
-      path:"/resetPassOtpVerify",element:<><Navbar/><ResetPassOtpVerify/></>
+      path:"/resetPassOtpVerify",element:<><Navbar/><ResetPassOtpVerify/><Footer/></>
     },
     {
-      path:"/reset-password",element:<><Navbar/><ResetPassword/></>
+      path:"/reset-password",element:<><Navbar/><ResetPassword/><Footer/></>
     },
     {
-      path:"/upload-product",element:<><Navbar/><ProductUpload/></>
+      path:"/upload-product",element:<><Navbar/><ProductUpload/><Footer/></>
     },
     {
       path:"/about-us",element:<><Navbar/><AboutUs/><Footer/></>
@@ -91,10 +91,10 @@ const App = () => {
       path:"/MyProducts",loader:checkUserAuth,element:<><Navbar/><MyProducts/><Footer/></>
     },
     {
-      path:"/chat-users",loader:checkUserAuth,element:<><Navbar/><ChatUsers/></>
+      path:"/chat-users",loader:checkUserAuth,element:<><Navbar/><ChatUsers/><Footer/></>
     },
     {
-      path:"/user-conversation",loader:checkUserAuth,element:<><Navbar/><UserConversation/></>
+      path:"/user-conversation",loader:checkUserAuth,element:<><Navbar/><UserConversation/><Footer/></>
     },
     {
       path:"*",element:<><Error/></>
@@ -149,7 +149,7 @@ const App = () => {
 
 
   return (
-    <div className='bg-[#0B0B0F] text-white h-screen w-screen
+    <div className='bg-slate-950 text-white h-screen w-screen
     overflow-x-hidden overflow-y-auto'>
       <RouterProvider router={router}>
       </RouterProvider>

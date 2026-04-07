@@ -84,18 +84,18 @@ const Login = () => {
     }
   }
   return (
-    <div className='flex px-24 overflow-y-hidden'>
+    <div className='flex min-h-screen px-24 overflow-x-hidden overflow-y-auto'>
 
-      <div className='w-[50%]'>
+      <div className='w-[50%] flex flex-col justify-center'>
            <Typography variant="h3" sx={{fontWeight:600}} >
                  Welcome!
                </Typography>
-                <p className='text-[14px] mt-2'>Login to Smart<span className='text-yellow-400 font-semibold text-[16px]'>X</span> to continue to Smart<span className='text-yellow-400 font-semibold text-[16px]'>X</span></p>
+                <p className='text-[14px] mt-2 text-slate-300'>Login to Trade<span className='text-yellow-400 font-semibold text-[16px]'>X</span> to continue to Trade<span className='text-yellow-400 font-semibold text-[16px]'>X</span></p>
 
 
 
                 {/* login form  */}
-                <div className='w-[80%] bg-white rounded-md mt-24 p-6 overflow-y-hidden loginAnimation' >
+                <div className='w-[80%] bg-slate-900 border border-slate-700 rounded-md mt-2 p-6 loginAnimation overflow-y-hidden' >
                   <form className='flex flex-col gap-6' onSubmit={submitHandler}>
                     <TextField 
                     type="email"
@@ -153,13 +153,13 @@ const Login = () => {
                   Log In
                  </Button>
                    {
-            loading &&  <i class="fa-solid  fa-spinner animate-spin -ml-8"></i>
+            loading &&  <i className="fa-solid  fa-spinner animate-spin -ml-8"></i>
            }
          </div>
                   
                   </form>
 
-              <p className='text-black mt-6 flex justify-center gap-2 text-[16px] inputAnimation'>
+              <p className='text-slate-300 mt-6 flex justify-center gap-2 text-[16px] inputAnimation'>
             Don't have an account?
              <span className='text-blue-600 cursor-pointer' 
              onClick={()=>{navigate("/signup")}}>Sign Up</span>
@@ -169,8 +169,18 @@ const Login = () => {
 
 
         {/* logo animation  */}
-      <div className='w-[50%] mt-32 flex items-center justify-center'>
-        <LogoAnimation/>
+      <div className='w-[50%] flex items-center justify-center'>
+        <div className='relative w-[86%] h-[520px] rounded-3xl overflow-hidden border border-[#123b76] shadow-[0_18px_55px_rgba(3,10,31,0.55)]'>
+          <img
+            src="/auth_pg.png"
+            alt="TradeX login visual"
+            className='absolute inset-0 h-full w-full object-cover'
+          />
+         
+          <div className='relative z-10 flex h-full items-center justify-center'>
+            
+          </div>
+        </div>
       </div>
 
    

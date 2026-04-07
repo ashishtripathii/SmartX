@@ -1,8 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
+const getInitialWishlist = () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    localStorage.removeItem("wishlistProducts");
+    return [];
+  }
+
+  const storedProducts = localStorage.getItem("wishlistProducts");
+  return storedProducts ? JSON.parse(storedProducts) : [];
+};
+
 const initialState = {
-    allProducts:localStorage.getItem("wishlistProducts") ? JSON.parse(localStorage.getItem("wishlistProducts")) : [],
+  allProducts: getInitialWishlist(),
 }
 
 export const wishListSlice = createSlice({
@@ -30,9 +41,13 @@ export const wishListSlice = createSlice({
        state.allProducts = filteredProducts;
        localStorage.setItem("wishlistProducts",JSON.stringify(state.allProducts));
        toast.error("Product removed successfully");
+        },
+        clearWishlist:(state)=>{
+          state.allProducts = [];
+          localStorage.removeItem("wishlistProducts");
         }
     }
 })
 
-export const {addProductToWishlist,removeProductFromWislist} = wishListSlice.actions;
+export const {addProductToWishlist,removeProductFromWislist,clearWishlist} = wishListSlice.actions;
 export default wishListSlice.reducer;

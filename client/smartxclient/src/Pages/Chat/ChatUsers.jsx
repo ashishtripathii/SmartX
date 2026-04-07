@@ -56,7 +56,7 @@ const ChatUsers = () => {
               No messages, yet?
             </div>
           ) : (
-            <div className="flex  gap-4 w-[91vw] min-h-[86vh] mx-auto  my-4 py-4 px-4 flex-col bg-gray-900 rounded-md">
+            <div className="flex  gap-4 w-[91vw] min-h-[86vh] mx-auto  my-4 py-4 px-4 flex-col bg-slate-900 rounded-md">
               {allUsers.map((user) => {
                 return (
                   <div key={user._id}>
@@ -68,7 +68,7 @@ const ChatUsers = () => {
                             onClick={() => {
                               navigate("/user-conversation", { state: u });
                             }}
-                            className="bg-gray-950 p-4 rounded-md
+                            className="bg-slate-950 p-4 rounded-md
                                        flex gap-2 items-center cursor-pointer"
                           >
                             <div className="relative">

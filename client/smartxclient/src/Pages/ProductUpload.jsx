@@ -1,6 +1,5 @@
 import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { FaBrain } from "react-icons/fa6";
 import { FaFileCode } from "react-icons/fa";
 import axios from "axios";
 import aiLogo from "../assets/gemini-color.png";
@@ -218,14 +217,15 @@ const ProductUpload = () => {
   },[productData])
 
   return (
-    <div>
+    <div className="bg-slate-950 text-slate-300 min-h-screen px-4 md:px-8 lg:px-14 py-10">
       <Typography
         variant="h5"
         sx={{
-          marginTop: "16px",
           textTransform: "uppercase",
-          fontWeight: 600,
-          marginBottom: "16px",
+          fontWeight: 700,
+          marginBottom: "20px",
+          color: "#e2e8f0",
+          letterSpacing: "0.06em",
         }}
         align="center"
       >
@@ -233,14 +233,15 @@ const ProductUpload = () => {
         productData ? "Update" : "Post"
       }   your Ad
       </Typography>
-      <div className="w-[80%] mx-auto border rounded-md border-gray-700 p-4">
+      <div className="w-full lg:w-[82%] mx-auto border rounded-2xl border-slate-800 bg-slate-900/80 p-4 md:p-6 shadow-[0_20px_50px_rgba(2,6,23,0.55)]">
         <form className="flex flex-col gap-4" onSubmit={productData ? productUpdateHandler : submitHandler}>
           <Typography
             variant="h6"
             sx={{
               textTransform: "uppercase",
-              fontWeight: 400,
+              fontWeight: 600,
               marginBottom: "8px",
+              color: "#cbd5e1",
             }}
           >
             Include some details
@@ -268,7 +269,7 @@ const ProductUpload = () => {
                   <img
                     src={aiLogo}
                     alt="aiLogo"
-                    className="h-12 object-cover cursor-pointer"
+                    className="h-9 w-9 rounded-full object-cover cursor-pointer"
                   />
                 </InputAdornment>
               ),
@@ -293,12 +294,12 @@ const ProductUpload = () => {
           <div className="relative">
             <label>
               <div className="flex items-center gap-4">
-                <p className="text-[18px] ">
+                <p className="text-[18px] text-slate-200">
                   Description <sup>*</sup>{" "}
                 </p>
               </div>
               <textarea
-                className="bg-gray-800 rounded-sm w-full outline-none p-2"
+                className="bg-slate-800 border border-slate-700 text-slate-100 rounded-md w-full outline-none p-3 focus:border-indigo-500"
                 placeholder="Include condition, features and reason for selling"
                 rows={4}
                 onChange={changeHandler}
@@ -308,12 +309,12 @@ const ProductUpload = () => {
             </label>
             {
 
-                descLoading ? ( <i class="fa-solid fa-spinner absolute right-2 bottom-4 animate-spin"></i>)
+                descLoading ? ( <i className="fa-solid fa-spinner absolute right-2 bottom-4 animate-spin"></i>)
                 : 
                 (<img
               src={aiLogo}
               alt="aiLogo"
-              className="h-8 object-cover cursor-pointer absolute right-2 bottom-4"
+              className="h-8 w-8 rounded-full object-cover cursor-pointer absolute right-2 bottom-4"
               onClick={productDescriptionEnhancerHandler}
             />)
 
@@ -382,8 +383,9 @@ const ProductUpload = () => {
               variant="h6"
               sx={{
                 textTransform: "uppercase",
-                fontWeight: 400,
+                fontWeight: 600,
                 marginTop: "8px",
+                color: "#cbd5e1",
               }}
             >
               Set a price
@@ -423,13 +425,14 @@ const ProductUpload = () => {
               variant="h6"
               sx={{
                 textTransform: "uppercase",
-                fontWeight: 400,
+                fontWeight: 600,
                 marginBottom: "8x",
+                color: "#cbd5e1",
               }}
             >
               Product Category
             </Typography>
-            <select className="bg-gray-800 px-2 py-4 w-full outline-none border-none"
+            <select className="bg-slate-800 border border-slate-700 rounded-md px-3 py-4 w-full outline-none"
             value={formdata.category}
             name="category"
             onChange={changeHandler}
@@ -451,15 +454,15 @@ const ProductUpload = () => {
           <div className="mt-2">
             <Typography
               variant="h6"
-              sx={{ textTransform: "uppercase", fontWeight: 400 }}
+              sx={{ textTransform: "uppercase", fontWeight: 600, color: "#cbd5e1" }}
             >
               Condition of product
             </Typography>
 
-            <div className="flex flex-row gap-4 bg-gray-800 w-fit px-6 py-2 rounded-full">
+            <div className="flex flex-row gap-4 bg-slate-800 border border-slate-700 w-fit px-4 py-2 rounded-full">
               <div
                 className={`px-4 py-2 rounded-full cursor-pointer ${
-                  condition === "New" ? "bg-slate-950" : ""
+                  condition === "New" ? "bg-indigo-600 text-white" : "text-slate-300"
                 }`}
                 onClick={() => {
                   setCondition("New");
@@ -470,7 +473,7 @@ const ProductUpload = () => {
 
               <div
                 className={` px-4 py-2 rounded-full cursor-pointer ${
-                  condition !== "New" ? "bg-slate-950" : ""
+                  condition !== "New" ? "bg-indigo-600 text-white" : "text-slate-300"
                 }`}
                 onClick={() => {
                   setCondition("Used");
@@ -488,20 +491,21 @@ const ProductUpload = () => {
               variant="h6"
               sx={{
                 textTransform: "uppercase",
-                fontWeight: 400,
+                fontWeight: 600,
                 marginTop: "8px",
+                color: "#cbd5e1",
               }}
             >
               Upload Photos{" "}
             </Typography>
 
             <label>
-              <div className=" w-full border bg-gray-800 border-gray-600 flex flex-row flex-wrap items-center justify-center  gap-2 h-[200px] border-dashed  cursor-pointer">
+              <div className="w-full border bg-slate-800 border-slate-600 flex flex-row flex-wrap items-center justify-center gap-3 h-[220px] border-dashed rounded-xl cursor-pointer hover:border-indigo-500 transition-all duration-300">
                
                {
-                images.length < 1 && <div className=" flex-col gap-2 flex items-center justify-center h-full">
+                images.length < 1 && <div className="flex-col gap-2 flex items-center justify-center h-full text-slate-400">
                      <FaFileCode size={40} />
-                <p>Your files here or Browse to upload</p>
+                <p>Your files here or browse to upload</p>
                 </div>
                }
 
@@ -510,9 +514,9 @@ const ProductUpload = () => {
         
                {
                 images.length > 0 && Array.from(images).map((img,index)=>{
-                    return <div className="border relative"key={index}  >
+                  return <div className="border border-slate-700 rounded-md overflow-hidden relative"key={index}  >
                         <img src={URL.createObjectURL(img)} alt="preview"  className="h-32 w-32 object-cover"/>
-                        <div className="absolute top-0 right-0 bg-black"
+                    <div className="absolute top-0 right-0 bg-black/80 cursor-pointer"
                         onClick={()=>{imageRemoveHandler(index)}}>
                             <RxCross2/>
                         </div>
@@ -540,7 +544,7 @@ const ProductUpload = () => {
         
             variant="contained"
             size="large"
-            sx={{ backgroundColor: "yellow", color: "black" ,textTransform:"none",fontWeight:600}}
+            sx={{ textTransform:"none",fontWeight:600 }}
             type="submit"
           >
             {
@@ -549,7 +553,7 @@ const ProductUpload = () => {
             
           </Button>
                    {
-            loading &&  <i class="fa-solid text-black  fa-spinner animate-spin -ml-8"></i>
+            loading &&  <i className="fa-solid text-slate-100 fa-spinner animate-spin -ml-8"></i>
            }
       </div>
         </form>

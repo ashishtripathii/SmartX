@@ -6,7 +6,7 @@ const Error = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-[#0B0B0F] min-h-screen flex items-center justify-center px-6 text-gray-300">
+    <div className="bg-slate-950 min-h-screen flex items-center justify-center px-6 text-slate-300">
       <div className="text-center max-w-2xl">
 
         {/* ICON */}
@@ -23,9 +23,9 @@ const Error = () => {
         </h2>
 
         {/* DESC */}
-        <p className="text-gray-400 mb-10 leading-relaxed">
+        <p className="text-slate-400 mb-10 leading-relaxed">
           Oops! The page you're looking for doesn't exist or has been moved.
-          Let's get you back to SmartX marketplace.
+          Let's get you back to TradeX marketplace.
         </p>
 
         {/* BUTTONS */}
@@ -41,7 +41,7 @@ const Error = () => {
 
           <button
             onClick={() => navigate("/")}
-            className="flex items-center justify-center gap-2 border border-gray-700 hover:border-indigo-500 px-6 py-3 rounded-xl font-medium transition"
+            className="flex items-center justify-center gap-2 border border-slate-700 hover:border-blue-500 px-6 py-3 rounded-xl font-medium transition"
           >
             <FaSearch />
             Browse Ads
@@ -50,8 +50,8 @@ const Error = () => {
         </div>
 
         {/* EXTRA TEXT */}
-        <div className="mt-16 text-sm text-gray-500">
-          Need help? Contact SmartX support anytime.
+        <div className="mt-16 text-sm text-slate-500">
+          Need help? Contact TradeX support anytime.
         </div>
       </div>
     </div>

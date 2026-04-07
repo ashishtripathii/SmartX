@@ -127,7 +127,7 @@ const UserConversation = () => {
   }, [socket]);
 
   return (
-    <div className="w-[91vw] h-[86vh]  mx-auto  my-4  bg-gray-900 rounded-md">
+    <div className="w-[91vw] h-[86vh]  mx-auto  my-4  bg-slate-900 rounded-md">
       {/* receiver information */}
       <div className="h-[12%] px-2 flex items-center justify-between">
         <div className="flex flex-row gap-2 items-center">
@@ -196,12 +196,12 @@ const UserConversation = () => {
                       } flex gap-1 max-w-[50%]`}
                     >
                       <p
-                        className={`${userData?._id === msg?.senderId ? "bg-gray-950 " : "bg-gray-600 "} px-2 py-1 rounded-md
+                        className={`${userData?._id === msg?.senderId ? "bg-slate-950 " : "bg-slate-600 "} px-2 py-1 rounded-md
                             w-fit`}
                       >
                         {msg?.message}
                       </p>
-                      <p className="text-xs text-gray-600 mt-3">
+                      <p className="text-xs text-slate-600 mt-3">
                         {moment(msg?.createdAt).format("LT")}
                       </p>
                     </div>
@@ -225,7 +225,7 @@ const UserConversation = () => {
             onChange={(e) => {
               setMessage(e.target.value);
             }}
-            className="w-full p-2 rounded-full  outline-none bg-gray-800"
+            className="w-full p-2 rounded-full  outline-none bg-slate-800"
             placeholder="Type a message"
           />
 

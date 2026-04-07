@@ -1,6 +1,44 @@
 // const client = require("../config/openai");
 const ai = require("../config/googleai");
 
+const resolveAiError = (error) => {
+  const status = error?.status || error?.error?.code;
+  const rawMessage =
+    error?.error?.message || error?.message || "AI service failure";
+  const normalized = rawMessage.toLowerCase();
+
+  if (
+    normalized.includes("api key was reported as leaked") ||
+    normalized.includes("permission_denied")
+  ) {
+    return {
+      statusCode: 503,
+      message:
+        "AI service key is invalid or leaked. Please rotate google_api_key in server .env and restart server.",
+    };
+  }
+
+  if (normalized.includes("api key") || normalized.includes("credential")) {
+    return {
+      statusCode: 503,
+      message:
+        "AI service is not configured correctly. Please check google_api_key in server .env.",
+    };
+  }
+
+  if (status === 429 || normalized.includes("quota") || normalized.includes("rate")) {
+    return {
+      statusCode: 429,
+      message: "AI service limit reached. Please try again after some time.",
+    };
+  }
+
+  return {
+    statusCode: 500,
+    message: "Internal Server error",
+  };
+};
+
 
 
 // chatboat
@@ -34,9 +72,9 @@ exports.aiChatboat = async (req, res) => {
       contents: formattedMessages,
 
       config: {
-        systemInstruction: `You are a virtual support assistant for SmartX, an OLX-like classified marketplace website. Your role is to help users only with the SmartX website, its features, and how to use the platform. You must not answer questions outside the scope of this marketplace.
+        systemInstruction: `You are a virtual support assistant for TradeX, an OLX-like classified marketplace website. Your role is to help users only with the TradeX website, its features, and how to use the platform. You must not answer questions outside the scope of this marketplace.
 
-The SmartX platform allows users to buy and sell products through classified ads. The Login button is located at the top-right corner of the homepage, with a Signup option available next to it for new users. The Post Ad button is visible in the homepage header and requires the user to be logged in.
+The TradeX platform allows users to buy and sell products through classified ads. The Login button is located at the top-right corner of the homepage, with a Signup option available next to it for new users. The Post Ad button is visible in the homepage header and requires the user to be logged in.
 
 While posting an ad, users must provide:
 - product title
@@ -47,7 +85,7 @@ While posting an ad, users must provide:
 - location
 - condition (new or used)
 
-SmartX tools:
+TradeX tools:
 - Description Enhancer → improves clarity honestly
 - Title Enhancer → optimizes titles
 - Price Estimator → suggests price range (seller decides final price)
@@ -59,19 +97,19 @@ Users can:
 - contact sellers
 - add items to wishlist via heart icon
 
-NOT available on SmartX:
+NOT available on TradeX:
 - online payments
 - delivery/shipping
 - admin actions
 
 If asked owner/CEO reply EXACTLY:
-“The owner and CEO of SmartX is Sourabh Tembhare.”
+"The owner and CEO of TradeX is Sourabh Tembhare."
 
 If asked support contact reply EXACTLY:
 “You can contact our support team at sourabhtembhare65@gmail.com.”
 
 If question is unrelated reply EXACTLY:
-“I’m here to help only with SmartX. I can’t assist with questions outside this platform.”
+"I'm here to help only with TradeX. I can't assist with questions outside this platform."
 
 Keep responses short, friendly, professional, and never guess features.`,
       },
@@ -84,9 +122,11 @@ Keep responses short, friendly, professional, and never guess features.`,
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({
+    const { statusCode, message } = resolveAiError(error);
+
+    return res.status(statusCode).json({
       success: false,
-      message: "Internal Server error",
+      message,
     });
   }
 };
@@ -141,9 +181,12 @@ Rules:
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
+
+    const { statusCode, message } = resolveAiError(error);
+
+    return res.status(statusCode).json({
       success: false,
-      message: "Internal Server error",
+      message,
     });
   }
 };

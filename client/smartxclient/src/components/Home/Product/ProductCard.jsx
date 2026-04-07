@@ -36,19 +36,19 @@ const ProductCard = ({product}) => {
   }
   
   return (
-    <div className='w-[337px] h-[315px] border bg-gray-900 border-gray-600 px-2 py-2 rounded-md flex flex-col gap-4 cursor-pointer'
+    <div className='w-[337px] h-[315px] border bg-slate-900 border-slate-600 px-2 py-2 rounded-md flex flex-col gap-4 cursor-pointer'
     >
 
        <div className=' w-full h-[180px] relative '>
          <img src={product?.images[0].url} alt={`${product?.productName}Image`}
          className='  w-full h-full object-cover' onClick={()=>{navigate(`/product-details/${product?._id}`)}}/>
 
-         <div className="absolute top-1 right-1 bg-gray-50 p-2 rounded-full">
+         <div className="absolute top-1 right-1 bg-slate-100 p-2 rounded-full">
           {
             allProducts.some((item)=> item?._id === product?._id ) ? 
-            <IoHeart size={25} className='text-black' onClick={removeProductHandler}/> 
+            <IoHeart size={25} className='text-red-500' onClick={removeProductHandler}/> 
             : 
-           <GoHeart size={25} className='text-black' onClick={addProductToWishlistHandler}/>
+           <GoHeart size={25} className='text-slate-700' onClick={addProductToWishlistHandler}/>
           }
          
 
@@ -69,7 +69,7 @@ const ProductCard = ({product}) => {
         </div>
 
         {/* productName */}
-        <div className='text-gray-300 -mt-1 mb-1' >
+        <div className='text-slate-300 -mt-1 mb-1' >
             <Typography noWrap>
                  {
                     product?.productName
@@ -79,7 +79,7 @@ const ProductCard = ({product}) => {
 
 
         {/* product description */}
-        <div className='text-gray-300 '>
+        <div className='text-slate-300 '>
             <Typography noWrap sx={{fontSize:"14px"}}>
                 {
                     product?.description
@@ -88,7 +88,7 @@ const ProductCard = ({product}) => {
         </div>
 
         {/* location */}
-        <div  className='text-gray-300 w-[100%] flex items-center '>
+        <div  className='text-slate-300 w-[100%] flex items-center '>
          <div className='w-[70%]'>
                <Typography noWrap sx={{fontSize:"12px"}}>
                 {

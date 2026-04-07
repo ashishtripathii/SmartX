@@ -5,17 +5,10 @@ import 'swiper/css';
 import { Navigation ,Pagination,Autoplay} from 'swiper/modules';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import image1 from "../assets/Investor-banner.webp"
-import image2 from "../assets/68328523628574.webp"
-import image3 from "../assets/1338bd4fc60390d8.webp"
-import image4 from "../assets/uber_new_high._CB537689643_.jpg"
-import image5 from "../assets/D323819370_DesktopHero_3000x1200._CB778388200_.jpg"
-import image6 from "../assets/1600w-kU1ebZpbiSQ.webp"
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import ProductCard from '../components/Home/Product/ProductCard';
 import SkelatonLoading from '../components/Common/SkelatonLoading';
-
 const Home = () => {
 
   const [loading,setLoading] =  useState(false);
@@ -27,12 +20,12 @@ const Home = () => {
   const scrollRef = useRef(null);
 
   const slides = [
-    { imageUrl:image2 },
-    { imageUrl:image3 },
-    { imageUrl:image4 },
-    { imageUrl:image5 },
-    { imageUrl:image1 },
-    { imageUrl:image6 },
+    { imageUrl:"/home-3.webp" },
+    { imageUrl:"/home-2.webp" },
+    { imageUrl:"/home-1.avif" },
+    { imageUrl:"/home-4.jpg" },
+    { imageUrl:"/home-5.jpg" },
+   
   ]
 
 

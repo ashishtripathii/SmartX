@@ -11,14 +11,14 @@ import {
 
 const faqData = [
   {
-    question: "What is SmartX?",
+    question: "What is TradeX?",
     answer:
-      "SmartX is a local online marketplace where users can buy and sell products within their community quickly and safely.",
+      "TradeX is a local online marketplace where users can buy and sell products within their community quickly and safely.",
   },
   {
-    question: "Is SmartX free to use?",
+    question: "Is TradeX free to use?",
     answer:
-      "Yes, SmartX is completely free for browsing and posting ads. There are no hidden charges for basic usage.",
+      "Yes, TradeX is completely free for browsing and posting ads. There are no hidden charges for basic usage.",
   },
   {
     question: "How do I post an ad?",
@@ -28,12 +28,12 @@ const faqData = [
   {
     question: "How can I contact a seller or buyer?",
     answer:
-      "You can use SmartX's built-in chat system to communicate directly with buyers or sellers securely.",
+      "You can use TradeX's built-in chat system to communicate directly with buyers or sellers securely.",
   },
   {
-    question: "Is SmartX safe?",
+    question: "Is TradeX safe?",
     answer:
-      "SmartX promotes safe transactions by encouraging local meetups, transparent listings, and secure communication.",
+      "TradeX promotes safe transactions by encouraging local meetups, transparent listings, and secure communication.",
   },
 ];
 
@@ -45,7 +45,7 @@ const Help = () => {
   };
 
   return (
-    <div className="bg-[#0B0B0F] text-gray-300 min-h-screen px-6 md:px-16 pb-24 pt-12 space-y-28">
+    <div className="bg-slate-950 text-slate-300 min-h-screen px-6 md:px-16 pb-24 pt-12 space-y-28">
 
       {/* HERO */}
       <section className="max-w-5xl mx-auto text-center space-y-6">
@@ -53,12 +53,17 @@ const Help = () => {
           <FaLifeRing />
         </div>
         <h1 className="text-5xl md:text-6xl font-bold text-white">
-          SmartX <span className="text-indigo-500">Help Center</span>
+          TradeX <span className="text-indigo-500">Help Center</span>
         </h1>
-        <p className="text-lg text-gray-400 leading-relaxed">
-          Find answers, learn how SmartX works, and get tips to buy and sell
+        <p className="text-lg text-slate-400 leading-relaxed">
+          Find answers, learn how TradeX works, and get tips to buy and sell
           safely in your local community.
         </p>
+        <img
+          src="/help.jpg"
+          alt="TradeX help and guidance"
+          className="w-full max-h-[500px] rounded-2xl  object-contain shadow-[0_16px_45px_rgba(2,6,23,0.55)]"
+        />
       </section>
 
       {/* GETTING STARTED */}
@@ -68,9 +73,9 @@ const Help = () => {
           <h2 className="text-3xl font-semibold text-white">
             Getting Started
           </h2>
-          <p className="text-gray-400 leading-relaxed">
+          <p className="text-slate-400 leading-relaxed">
             Create an account, complete your profile, and start browsing or
-            posting ads. SmartX is designed to be simple and beginner-friendly.
+            posting ads. TradeX is designed to be simple and beginner-friendly.
           </p>
         </div>
       </section>
@@ -82,7 +87,7 @@ const Help = () => {
           <h2 className="text-3xl font-semibold text-white">
             Posting an Ad
           </h2>
-          <p className="text-gray-400 leading-relaxed">
+          <p className="text-slate-400 leading-relaxed">
             Use clear titles, honest descriptions, and fair pricing. Quality
             ads attract more genuine buyers and close deals faster.
           </p>
@@ -96,8 +101,8 @@ const Help = () => {
           <h2 className="text-3xl font-semibold text-white">
             Chat & Communication
           </h2>
-          <p className="text-gray-400 leading-relaxed">
-            Communicate securely using SmartX chat. Avoid sharing personal
+          <p className="text-slate-400 leading-relaxed">
+            Communicate securely using TradeX chat. Avoid sharing personal
             information and always stay respectful.
           </p>
         </div>
@@ -110,7 +115,7 @@ const Help = () => {
           <h2 className="text-3xl font-semibold text-white">
             Safety Tips
           </h2>
-          <p className="text-gray-400 leading-relaxed">
+          <p className="text-slate-400 leading-relaxed">
             Meet in public places, inspect items before payment, and trust your
             instincts when making transactions.
           </p>
@@ -130,7 +135,7 @@ const Help = () => {
           {faqData.map((faq, index) => (
             <div
               key={index}
-              className="border border-gray-800 rounded-xl overflow-hidden"
+              className="border border-slate-800 rounded-xl overflow-hidden"
             >
               <button
                 onClick={() => toggleFAQ(index)}
@@ -147,7 +152,7 @@ const Help = () => {
               </button>
 
               {activeIndex === index && (
-                <div className="px-6 py-4 text-gray-400 bg-[#0B0B0F]">
+                <div className="px-6 py-4 text-slate-400 bg-slate-950">
                   {faq.answer}
                 </div>
               )}

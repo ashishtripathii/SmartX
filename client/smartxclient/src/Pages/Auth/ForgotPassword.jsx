@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import LogoAnimation from '../../components/Auth/LogoAnimation'
 import { Button, InputAdornment, TextField, Typography } from '@mui/material'
 import { CgMail } from "react-icons/cg";
 import { useGSAP } from '@gsap/react';
@@ -56,17 +55,17 @@ const ForgotPassword = () => {
 
     }
   return (
-    <div className='flex flex-row px-24'>
+    <div className='flex min-h-screen px-24 overflow-x-hidden overflow-y-auto'>
 
         {/* forgot password form */}
-        <div className='w-[50%]'>
+        <div className='w-[50%] flex flex-col justify-center'>
           <Typography variant="h3" sx={{fontWeight:600}} >
             Forgot Password
           </Typography>
-          <p className='text-[14px] mt-2'>Enter your email and we'll send you a otp to reset your password</p>
+          <p className='text-[14px] mt-2 text-slate-300'>Enter your email and we'll send you a otp to reset your password</p>
 
           {/* form  */}
-          <div className='bg-white rounded-md  w-[80%] mt-32 p-6 formAnimation'>
+          <div className='bg-slate-900 border border-slate-700 rounded-md w-[80%] p-6 formAnimation'>
                   <form className='flex flex-col gap-6 overflow-y-hidden'
                   onSubmit={submitHandler}>
             <TextField type="email" variant="filled"
@@ -102,7 +101,7 @@ const ForgotPassword = () => {
             </Button>
 
               {
-            loading &&  <i class="fa-solid fa-spinner animate-spin -ml-8"></i>
+            loading &&  <i className="fa-solid fa-spinner animate-spin -ml-8"></i>
            }
           </div>
           </form>
@@ -110,9 +109,17 @@ const ForgotPassword = () => {
         
         </div>
 
-        {/* logo animation */}
+        {/* forgot password image */}
         <div className='w-[50%] flex justify-center items-center'>
-            <LogoAnimation/>
+            <div className='relative w-[86%] h-[520px] rounded-3xl overflow-hidden border border-[#123b76] shadow-[0_18px_55px_rgba(3,10,31,0.55)]'>
+              <img
+                src="/auth_pg.png"
+                alt="TradeX forgot password visual"
+                className='absolute inset-0 h-full w-full object-cover'
+              />
+              <div className='relative z-10 flex h-full items-center justify-center'>
+              </div>
+            </div>
         </div>
 
     </div>

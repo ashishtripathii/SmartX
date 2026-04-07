@@ -95,10 +95,10 @@ const ProductDetails = () => {
           <Loader />
         </div>
       ) : (
-        <div className="w-[91vw] my-6 mx-auto  bg-gray-950 rounded-md shadow-md">
+        <div className="w-[91vw] my-6 mx-auto  bg-slate-950 rounded-md shadow-md">
           <div className="w-full flex gap-4">
             {/* image  */}
-            <div className="w-[70%] border border-gray-600">
+            <div className="w-[70%] border border-slate-600">
               <Swiper
                 navigation={true}
                 pagination={true}
@@ -120,7 +120,7 @@ const ProductDetails = () => {
 
             {/* product  details  */}
             <div className="w-[30%]  h-[550px] flex flex-col gap-4">
-              <div className="p-2 flex flex-col gap-4 h-[45%] border justify-center border-gray-600 ">
+              <div className="p-2 flex flex-col gap-4 h-[45%] border justify-center border-slate-600 ">
                 {/* price and icons  */}
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-1 ">
@@ -140,7 +140,7 @@ const ProductDetails = () => {
                     }}/>
                      {
                         allProducts.some((item)=> item?._id === productDetails?._id ) ? 
-                               <IoHeart  size={36} className="cursor-pointer" onClick={removeProductHandler}/> 
+                           <IoHeart  size={36} className="cursor-pointer text-red-500" onClick={removeProductHandler}/> 
                                : 
                               <GoHeart  size={36} className="cursor-pointer" onClick={addProductToWishlistHandler}/>
                     }
@@ -153,14 +153,14 @@ const ProductDetails = () => {
                 </p>
 
                 {/* location and product upload date  */}
-                <div className="flex flex-row justify-between items-center text-gray-400 ">
+                <div className="flex flex-row justify-between items-center text-slate-400 ">
                   <p>{productDetails?.location}</p>
 
                   <p>{moment(productDetails?.createdAt).format("ll")}</p>
                 </div>
               </div>
 
-              <div className="h-[55%]  border border-gray-600 p-2 flex flex-col gap-8 items-center  justify-center">
+              <div className="h-[55%]  border border-slate-600 p-2 flex flex-col gap-8 items-center  justify-center">
                 <div className="flex items-center gap-2 w-full">
                   <img
                     src={productDetails?.sellerId?.profilePicture}
@@ -169,11 +169,11 @@ const ProductDetails = () => {
                   />
 
                   <div>
-                    <p className="text-gray-400 text-[18px]">
+                    <p className="text-slate-400 text-[18px]">
                       Post by <span className="text-white">{productDetails?.sellerId?.firstName}</span>{" "}
                       <span  className="text-white">{productDetails?.sellerId?.lastName}</span>
                     </p>
-                    <p className="text-gray-400">
+                    <p className="text-slate-400">
                         Member since <span>
                                 {moment(productDetails?.sellerId?.createdAt).format("ll")}
                         </span>
@@ -184,7 +184,7 @@ const ProductDetails = () => {
               <Button variant="outlined" color="secondary" size="large" fullWidth 
               onClick={chatWithSellerHandler}>Chat with seller</Button>
 
-              <div className="flex items-center text-[16px] gap-1 text-gray-400">
+              <div className="flex items-center text-[16px] gap-1 text-slate-400">
                 <IoCallOutline/>
                 <p>
                     {
@@ -198,7 +198,7 @@ const ProductDetails = () => {
           </div>
 
           {/* description of the product  */}
-          <div className="mt-6 border border-gray-600 p-6">
+          <div className="mt-6 border border-slate-600 p-6">
             <Typography variant="h5">Description</Typography>
             <p className="mt-2">
               {

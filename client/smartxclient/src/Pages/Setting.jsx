@@ -177,23 +177,23 @@ const Setting = () => {
     <div className='w-[91vw] my-6 mx-auto flex flex-col gap-4'>
 
         {/* profile pictiure update  */}
-        <div className='bg-gray-900 rounded-md px-2 py-4 flex gap-4 items-center'>
+        <div className='bg-slate-900 rounded-md px-2 py-4 flex gap-4 items-center'>
 
             {
                 !showFile ?  <img src={userData?.profilePicture} alt={`${userData?.firstName}Image`} 
-            className='h-20 w-20 rounded-full border border-gray-400 object-cover'/>
+            className='h-20 w-20 rounded-full border border-slate-400 object-cover'/>
             :
             <img src={showFile} alt="selectedImage" 
-            className='h-20 w-20 rounded-full object-cover border border-gray-40'/>
+            className='h-20 w-20 rounded-full object-cover border border-slate-400'/>
 
             }
             
             <div className='flex flex-col gap-2'>
-                <p className='text-gray-400'>Change Profile Picture</p>
+                <p className='text-slate-400'>Change Profile Picture</p>
                <div className='flex items-center gap-2'>
                  <label>
-                    <p className='px-3 py-2 cursor-pointer bg-yellow-400 font-semibold
-                     hover:bg-yellow-600 rounded-md text-black transition-all duration-300 text-center '>
+                    <p className='px-3 py-2 cursor-pointer bg-indigo-600 font-semibold
+                     hover:bg-indigo-700 rounded-md text-white transition-all duration-300 text-center '>
                       Change
                     </p>
                     <input type="file" className="hidden"
@@ -201,96 +201,109 @@ const Setting = () => {
                   
                 </label>
                   {
-                    file &&  <button className={`px-4 py-2 cursor-pointer bg-gray-600 font-semibold
-                     hover:bg-gray-700 rounded-md text-white  transition-all duration-300 text-center 
-                    `}
-                      disabled={loading} onClick={updateProfilePictureHandler}>
+                    file &&  <Button
+                      variant="contained"
+                      size="medium"
+                      disabled={loading}
+                      onClick={updateProfilePictureHandler}
+                      sx={{ textTransform: "none" }}
+                    >
                       Upload
-                    </button>
+                    </Button>
                   }
                </div>
             </div>
         </div>
        
        {/* user information update  */}
-        <div className='bg-gray-900 rounded-md px-2 py-4 flex flex-col gap-4'>
+        <div className='bg-slate-900 rounded-md px-2 py-4 flex flex-col gap-4'>
          
 
-              <Typography variant="h6" className='text-gray-400'>Name Update</Typography>
+              <Typography variant="h6" className='text-slate-400'>Name Update</Typography>
           
 
             <div className=' flex flex-row gap-4 w-full'>
 
               {/* first Name */}
               <label className='flex flex-col gap-1 w-[50%]'>
-                <p className='text-gray-300'>First Name  <sup className='text-red-600'>*</sup></p>
+                <p className='text-slate-300'>First Name  <sup className='text-red-600'>*</sup></p>
                 <input type="text" 
                 value={formData.firstName} 
                 name='firstName'
                 required
                 onChange={onChangeHandler}
-                 className='bg-gray-800 border-none outline-none px-3 py-2 rounded-md w-[100%]'
+                 className='bg-slate-800 border-none outline-none px-3 py-2 rounded-md w-[100%]'
                 placeholder='Enter your first Name'/>
               </label>
 
               {/* last Name  */}
                <label className='flex flex-col gap-1 w-[50%]'>
-                <p className='text-gray-300'>Last Name  <sup className='text-red-600'>*</sup></p>
+                <p className='text-slate-300'>Last Name  <sup className='text-red-600'>*</sup></p>
                 <input type="text" 
                 value={formData.lastName}
                 name='lastName' 
                 required
                 onChange={onChangeHandler}
-                className='bg-gray-800 border-none outline-none px-3 py-2 rounded-md w-[100%]'
+                className='bg-slate-800 border-none outline-none px-3 py-2 rounded-md w-[100%]'
                 placeholder='Enter your last Name'/>
               </label>
 
             </div>
-              <button disabled={loading} onClick={nameUpdateHandler} className='px-3 py-2 cursor-pointer bg-yellow-400 font-semibold
-                     hover:bg-yellow-600 rounded-md text-black transition-all duration-300 text-center '>
-                      Update
-                    </button>
+              <Button
+                variant="contained"
+                size="medium"
+                disabled={loading}
+                onClick={nameUpdateHandler}
+                sx={{ textTransform: "none" }}
+              >
+                Update
+              </Button>
 
         </div>
 
       {/* password update  */}
-          <div className='bg-gray-900 rounded-md px-2 py-4 flex flex-col gap-4'>
+          <div className='bg-slate-900 rounded-md px-2 py-4 flex flex-col gap-4'>
          
 
-              <Typography variant="h6" className='text-gray-400'>Password</Typography>
+              <Typography variant="h6" className='text-slate-400'>Password</Typography>
           
 
             <div className=' flex flex-row gap-4 w-full'>
 
               {/* Current Password*/}
               <label className='flex flex-col gap-1 w-[50%]'>
-                <p className='text-gray-300'>Current Password <sup className='text-red-600'>*</sup> </p>
+                <p className='text-slate-300'>Current Password <sup className='text-red-600'>*</sup> </p>
                 <input type="password"
                 value={password.currentPassword} 
                 name='currentPassword'
                 required
                 onChange={passwordChangeHandler}
-                 className='bg-gray-800 border-none outline-none px-3 py-2 rounded-md w-[100%]'
+                 className='bg-slate-800 border-none outline-none px-3 py-2 rounded-md w-[100%]'
                 placeholder='Enter your current password'/>
               </label>
 
               {/* Change Password  */}
                <label className='flex flex-col gap-1 w-[50%]'>
-                <p className='text-gray-300'>Change Password  <sup className='text-red-600'>*</sup></p>
+                <p className='text-slate-300'>Change Password  <sup className='text-red-600'>*</sup></p>
                 <input type="password"
                 value={password.changePassword}
                 name='changePassword' 
                 required
                 onChange={passwordChangeHandler}
-                className='bg-gray-800 border-none outline-none px-3 py-2 rounded-md w-[100%]'
+                className='bg-slate-800 border-none outline-none px-3 py-2 rounded-md w-[100%]'
                 placeholder='Enter your change password'/>
               </label>
 
             </div>
-              <button disabled={loading} onClick={passwordUpdateHandler} className='px-3 py-2 cursor-pointer bg-yellow-400 font-semibold
-                     hover:bg-yellow-600 rounded-md text-black transition-all duration-300 text-center '>
-                      Update
-                    </button>
+              <Button
+                variant="contained"
+                size="medium"
+                disabled={loading}
+                onClick={passwordUpdateHandler}
+                sx={{ textTransform: "none" }}
+              >
+                Update
+              </Button>
 
         </div>
     </div>

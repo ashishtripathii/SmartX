@@ -110,8 +110,8 @@ const Otp = () => {
       numInputs={4}
       renderSeparator={<span>-</span>}
       renderInput={(props) => <input {...props} 
-      className='w-20 h-12 text-4xl text-center text-white bg-gray-600 border
-      border-gray-400 rounded-md'/>}
+      className='w-20 h-12 text-4xl text-center text-white bg-slate-600 border
+      border-slate-400 rounded-md'/>}
     />
         </div>
 
@@ -124,7 +124,7 @@ const Otp = () => {
                 Verify Otp
                 </Button>
                  {
-            loading &&  <i class="fa-solid fa-spinner animate-spin -ml-8"></i>
+            loading &&  <i className="fa-solid fa-spinner animate-spin -ml-8"></i>
            }
         </div>
 

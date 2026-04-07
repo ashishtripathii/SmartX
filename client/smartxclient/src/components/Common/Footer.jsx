@@ -12,17 +12,17 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 border-t border-gray-800 text-gray-400 px-6 md:px-16 py-16">
+    <footer className="bg-slate-900 border-t border-slate-800 text-slate-400 px-6 md:px-16 py-16">
       <div className="max-w-7xl mx-auto grid gap-12 md:grid-cols-4">
 
         {/* BRAND */}
         <div className="space-y-4">
           <div className="flex items-center gap-3 text-white text-2xl font-bold">
             <FaStore className="text-indigo-500" />
-            SmartX
+            Tradex
           </div>
           <p className="text-sm leading-relaxed">
-            SmartX is a local online marketplace where users can buy and sell
+            Tradex is a local online marketplace where users can buy and sell
             products nearby — fast, safe, and simple.
           </p>
         </div>
@@ -87,7 +87,7 @@ const Footer = () => {
           <div className="space-y-3 text-sm">
             <p className="flex items-center gap-3">
               <FaEnvelope className="text-indigo-500" />
-              support@smartx.com
+              support@tradex.com
             </p>
             <p className="flex items-center gap-3">
               <FaPhoneAlt className="text-indigo-500" />
@@ -106,8 +106,8 @@ const Footer = () => {
       </div>
 
       {/* BOTTOM */}
-      <div className="mt-12 border-t border-gray-800 pt-6 text-center text-sm">
-        © {new Date().getFullYear()} SmartX. All rights reserved.
+      <div className="mt-12 border-t border-slate-800 pt-6 text-center text-sm">
+        © {new Date().getFullYear()} TradeX. All rights reserved.
       </div>
     </footer>
   );

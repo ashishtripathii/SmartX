@@ -80,13 +80,13 @@ const ChatboatModal = ({ setChatboat }) => {
   return (
     <div className='fixed inset-0 bg-black/60 flex items-center justify-center z-50'>
 
-      <div className='bg-gray-800 h-[80vh] w-[70vw] rounded-3xl flex flex-col'>
+      <div className='bg-slate-800 h-[80vh] w-[70vw] rounded-3xl flex flex-col'>
 
         {/* Header */}
-        <div className='px-6 py-3 flex justify-between items-center border-b border-gray-600'>
+        <div className='px-6 py-3 flex justify-between items-center border-b border-slate-600'>
           <div className='flex gap-2 items-center'>
             <img src={aiLogo} alt="ai" className='h-8' />
-            <p className='font-semibold text-xl text-white'>SmartX Bot</p>
+            <p className='font-semibold text-xl text-white'>TradeX Bot</p>
           </div>
 
           <RxCross2
@@ -107,8 +107,8 @@ const ChatboatModal = ({ setChatboat }) => {
               key={index}
               className={`px-3 py-2 rounded-xl text-white break-words
                 ${msg.role === "user"
-                  ? "self-end bg-gray-900 max-w-[60%]"
-                  : "self-start bg-gray-600 max-w-[75%]"
+                  ? "self-end bg-slate-900 max-w-[60%]"
+                  : "self-start bg-slate-600 max-w-[75%]"
                 }`}
             >
               {msg.content}
@@ -117,7 +117,7 @@ const ChatboatModal = ({ setChatboat }) => {
           ))}
 
           {loading && (
-            <div className='self-start bg-gray-600 px-3 py-2 rounded-xl text-white'>
+            <div className='self-start bg-slate-600 px-3 py-2 rounded-xl text-white'>
               Typing...
             </div>
           )}
@@ -131,7 +131,7 @@ const ChatboatModal = ({ setChatboat }) => {
         {/* Input */}
         <form
           onSubmit={submitHandler}
-          className='p-3 border-t border-gray-600 flex gap-2'
+          className='p-3 border-t border-slate-600 flex gap-2'
         >
 
           <input
@@ -139,7 +139,7 @@ const ChatboatModal = ({ setChatboat }) => {
             placeholder='Enter message...'
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className='flex-1 bg-gray-700 text-white rounded-full px-4 py-2 outline-none'
+            className='flex-1 bg-slate-700 text-white rounded-full px-4 py-2 outline-none'
           />
 
           <button

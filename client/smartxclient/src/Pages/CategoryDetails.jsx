@@ -53,12 +53,12 @@ const CategoryDetails = () => {
         </div>
       ) : (
         <div>
-          <div className="bg-gray-900 h-24 flex items-center px-6 font-semibold">
+          <div className="bg-slate-900 h-24 flex items-center px-6 font-semibold">
             <p>
-              <span className="text-gray-400">Home</span>{" "}
-              <span className="text-gray-400">/</span>{" "}
-              <span className="text-gray-400">Category</span>{" "}
-              <span className="text-gray-400">/</span>{" "}
+              <span className="text-slate-400">Home</span>{" "}
+              <span className="text-slate-400">/</span>{" "}
+              <span className="text-slate-400">Category</span>{" "}
+              <span className="text-slate-400">/</span>{" "}
               <span className="text-yellow-400">
                 {categoryPageDetails?.categoryName}
               </span>

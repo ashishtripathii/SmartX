@@ -103,18 +103,18 @@ const MyProducts = () => {
                   return <div key={index} className='flex flex-col gap-2 '>
                     <ProductCard product={product}/>
                     <div className='flex flex-row justify-between px-2 pt-4 pb-2 items-center border-b border-l border-r -mt-4
-                    border-gray-600 rounded-b-md '>
+                    border-slate-600 rounded-b-md '>
 
                       <div onClick={()=>{
                         navigate("/upload-product",{state:product})
                       }}>
                        
-                        <MdOutlineModeEdit size={25} className='cursor-pointer hover:text-gray-400 transition-all duration-300'/>
+                        <MdOutlineModeEdit size={25} className='cursor-pointer hover:text-slate-400 transition-all duration-300'/>
                         </div>
                       <div onClick={()=>{
                         deleteProdoctHandler(product?._id)
                       }}>
-                        <MdDelete  size={25} className='cursor-pointer hover:text-gray-400 transition-all duration-300'/>
+                        <MdDelete  size={25} className='cursor-pointer hover:text-slate-400 transition-all duration-300'/>
                       </div>
 
                     </div>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import LogoAnimation from '../../components/Auth/LogoAnimation'
 import { Button, InputAdornment, TextField, Typography } from '@mui/material'
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -96,17 +95,17 @@ const SignUp = () => {
   })
 
   return (
-    <div className='flex px-24  overflow-y-hidden '>
+    <div className='flex min-h-screen px-24 overflow-x-hidden overflow-y-auto'>
      {/* sign Up form */}
-        <div className='w-[50%]'>
+        <div className='w-[50%] flex flex-col justify-center'>
           <Typography variant="h3" sx={{fontWeight:600}} >
             Sign Up
           </Typography>
-          <p className='text-[14px] mt-2'>Fill the form below to create your account</p>
+          <p className='text-[14px] mt-2 text-slate-300'>Fill the form below to create your account</p>
 
           {/* form */}
 
-       <div className='bg-white rounded-md  w-[80%] mt-6 p-3 overflow-y-hidden fA1' >
+      <div className='bg-slate-900 border border-slate-700 rounded-md w-[80%] mt-2 p-3 fA1 overflow-y-hidden' >
            <form className="  flex flex-col gap-6" onSubmit={submitHandler} >
             <TextField type="text" 
             variant="filled" 
@@ -202,13 +201,13 @@ const SignUp = () => {
            sx={{textTransform:"none"}}
             >Sign Up</Button>
            {
-            loading &&  <i class="fa-solid fa-spinner animate-spin -ml-8"></i>
+            loading &&  <i className="fa-solid fa-spinner animate-spin -ml-8"></i>
            }
        </div>
          
 
           </form>
-           <p className='text-black  mt-6 flex justify-center gap-2 text-[16px] ipF'>
+           <p className='text-slate-300 mt-6 flex justify-center gap-2 text-[16px] ipF'>
             Allreday have an account?
              <span className='text-blue-600 cursor-pointer' 
              onClick={()=>{navigate("/login")}}>Sign In</span>
@@ -217,9 +216,19 @@ const SignUp = () => {
     
    </div>
 
-        {/* smartX logo  */}
-        <div className='w-[50%] flex justify-center items-center'>
-         <LogoAnimation/>
+        {/* TradeX logo  */}
+         <div className='w-[50%] flex justify-center items-center'>
+              <div className='relative w-[86%] h-[520px] rounded-3xl overflow-hidden border border-[#123b76] shadow-[0_18px_55px_rgba(3,10,31,0.55)]'>
+                <img
+                  src="/auth_pg.png"
+                  alt="TradeX sign up visual"
+                  className='absolute inset-0 h-full w-full object-cover'
+                />
+            
+                <div className='relative z-10 flex h-full items-center justify-center'>
+                 
+                </div>
+              </div>
           </div>
    </div>
   )

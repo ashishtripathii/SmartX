@@ -1,6 +1,5 @@
 import { Button, InputAdornment, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import LogoAnimation from '../../components/Auth/LogoAnimation'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { IoEyeSharp } from "react-icons/io5";
@@ -89,19 +88,19 @@ const ResetPassword = () => {
     
   }
   return (
-    <div className='flex px-24  w-screen '>
+    <div className='flex min-h-screen px-24 overflow-x-hidden overflow-y-auto'>
     
-    <div className='w-[50%]'>
+    <div className='w-[50%] flex flex-col justify-center'>
        
        <div>
          <Typography variant="h3" sx={{fontWeight:600}}>
         Change Your Password
       </Typography>
-      <p className='text-[14px] mt-2'>Enter a new password below to chnage your password</p>
+      <p className='text-[14px] mt-2 text-slate-300'>Enter a new password below to chnage your password</p>
        </div>
 
        {/* reset password form  */}
-       <div className='bg-white rounded-md mt-24  w-[80%] p-6 resestfFormAnimation overflow-y-hidden'>
+      <div className='bg-slate-900 border border-slate-700 rounded-md w-[80%] p-6 resestfFormAnimation overflow-y-hidden'>
     <form className=' flex flex-col gap-6'onSubmit={submitHandler}>
         <TextField 
         type={
@@ -172,7 +171,7 @@ const ResetPassword = () => {
           Reset Password
         </Button>
            {
-            loading &&  <i class="fa-solid fa-spinner animate-spin -ml-8"></i>
+            loading &&  <i className="fa-solid fa-spinner animate-spin -ml-8"></i>
            }
       </div>
        </form>
@@ -181,8 +180,16 @@ const ResetPassword = () => {
    
     </div>
 
-    <div className='w-[50%] flex items-center justify-center h-[calc(100vh-80px)] '>
-      <LogoAnimation/>
+    <div className='w-[50%] flex items-center justify-center'>
+      <div className='relative w-[86%] h-[520px] rounded-3xl overflow-hidden border border-[#123b76] shadow-[0_18px_55px_rgba(3,10,31,0.55)]'>
+        <img
+          src="/auth_pg.png"
+          alt="TradeX reset password visual"
+          className='absolute inset-0 h-full w-full object-cover'
+        />
+        <div className='relative z-10 flex h-full items-center justify-center'>
+        </div>
+      </div>
     </div>
 
     </div>

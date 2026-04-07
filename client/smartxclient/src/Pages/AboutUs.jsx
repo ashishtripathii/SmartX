@@ -1,14 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import {
-  FaStore,
-  FaUsers,
-  FaShieldAlt,
-  FaHandshake,
-  FaMobileAlt,
-  FaBolt,
-  FaHeart,
-} from "react-icons/fa";
 import gsap from "gsap";
+import {
+  LuHandshake,
+  LuRocket,
+  LuShieldCheck,
+  LuSmartphone,
+  LuSparkles,
+} from "react-icons/lu";
 
 const AboutUs = () => {
   const sectionsRef = useRef([]);
@@ -16,36 +14,50 @@ const AboutUs = () => {
   useEffect(() => {
     gsap.fromTo(
       sectionsRef.current,
-      { opacity: 0, y: 50 },
+      { opacity: 0, y: 80 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.9,
-        stagger: 0.2,
+        duration: 1,
+        stagger: 0.25,
         ease: "power3.out",
       }
     );
   }, []);
 
+  // 🔥 ONLY ICON (no text)
+  const IconShell = ({ Icon }) => (
+    <div className="flex items-center justify-center rounded-3xl border border-slate-800 bg-slate-900/60 p-10 
+    shadow-[0_16px_45px_rgba(2,6,23,0.45)] transition duration-500 hover:scale-105 hover:border-indigo-500">
+      
+      <div className="flex h-24 w-24 items-center justify-center rounded-full border border-indigo-500/30 
+      bg-slate-950 text-indigo-400 transition duration-500 hover:rotate-6">
+        <Icon size={44} />
+      </div>
+    </div>
+  );
+
   return (
-    <div className="bg-[#0B0B0F] text-gray-300 min-h-screen px-6 md:px-16 pb-24 pt-12 space-y-32">
+    <div className="bg-slate-950 text-slate-300 min-h-screen px-6 md:px-16 pb-24 pt-12 space-y-28">
 
       {/* HERO */}
       <section
         ref={(el) => (sectionsRef.current[0] = el)}
-        className="max-w-5xl mx-auto text-center space-y-6"
+        className="max-w-6xl mx-auto text-center space-y-6"
       >
-        <div className="flex justify-center text-indigo-500 text-6xl">
-          <FaStore />
-        </div>
         <h1 className="text-5xl md:text-6xl font-bold text-white">
-          About <span className="text-indigo-500">SmartX</span>
+          About <span className="text-indigo-500">MarketX</span>
         </h1>
-        <p className="text-lg text-gray-400 leading-relaxed">
-          SmartX is a local online marketplace where people can buy and sell
-          products within their own communities — quickly, safely, and without
-          complications.
+
+        <p className="text-lg text-slate-400">
+          MarketX is a modern marketplace for fast and easy local buying & selling.
         </p>
+
+        <img
+          src="/about.jpg"
+          className="w-full max-h-[420px] object-cover rounded-3xl border border-slate-800 shadow-xl 
+          hover:scale-105 transition duration-500"
+        />
       </section>
 
       {/* PURPOSE */}
@@ -53,37 +65,33 @@ const AboutUs = () => {
         ref={(el) => (sectionsRef.current[1] = el)}
         className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center"
       >
-        <div className="text-indigo-500 text-7xl mx-auto md:mx-0">
-          <FaUsers />
-        </div>
+        {/* TEXT */}
         <div className="space-y-4">
-          <h2 className="text-3xl font-semibold text-white">
-            Our Purpose
-          </h2>
-          <p className="text-gray-400 leading-relaxed">
-            We created SmartX to make local buying and selling effortless.
-            Instead of complicated platforms, we focus on nearby connections
-            that save time, reduce costs, and strengthen communities.
+          <h2 className="text-3xl font-semibold text-white">Our Purpose</h2>
+          <p className="text-slate-400">
+            We simplify local buying and selling to make it faster, easier, and more reliable.
           </p>
         </div>
+
+        {/* ICON */}
+        <IconShell Icon={LuSparkles} />
       </section>
 
       {/* SAFETY */}
       <section
         ref={(el) => (sectionsRef.current[2] = el)}
-        className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center md:flex-row-reverse"
+        className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center"
       >
-        <div className="text-indigo-500 text-7xl mx-auto md:mx-0">
-          <FaShieldAlt />
-        </div>
+        {/* ICON */}
+        <IconShell Icon={LuShieldCheck} />
+
+        {/* TEXT */}
         <div className="space-y-4">
           <h2 className="text-3xl font-semibold text-white">
             Safe Local Connections
           </h2>
-          <p className="text-gray-400 leading-relaxed">
-            SmartX encourages safe interactions by promoting clear listings,
-            direct communication, and local meetups. We help users make informed
-            decisions and connect with confidence.
+          <p className="text-slate-400">
+            Verified listings and secure communication ensure safe transactions.
           </p>
         </div>
       </section>
@@ -93,37 +101,33 @@ const AboutUs = () => {
         ref={(el) => (sectionsRef.current[3] = el)}
         className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center"
       >
-        <div className="text-indigo-500 text-7xl mx-auto md:mx-0">
-          <FaHandshake />
-        </div>
+        {/* TEXT */}
         <div className="space-y-4">
-          <h2 className="text-3xl font-semibold text-white">
-            Built on Trust
-          </h2>
-          <p className="text-gray-400 leading-relaxed">
-            Trust is the foundation of SmartX. We design our platform to be
-            transparent, honest, and reliable — so users feel comfortable every
-            time they buy or sell.
+          <h2 className="text-3xl font-semibold text-white">Built on Trust</h2>
+          <p className="text-slate-400">
+            Transparency and honesty make every deal reliable and trustworthy.
           </p>
         </div>
+
+        {/* ICON */}
+        <IconShell Icon={LuHandshake} />
       </section>
 
       {/* SIMPLICITY */}
       <section
         ref={(el) => (sectionsRef.current[4] = el)}
-        className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center md:flex-row-reverse"
+        className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center"
       >
-        <div className="text-indigo-500 text-7xl mx-auto md:mx-0">
-          <FaMobileAlt />
-        </div>
+        {/* ICON */}
+        <IconShell Icon={LuSmartphone} />
+
+        {/* TEXT */}
         <div className="space-y-4">
           <h2 className="text-3xl font-semibold text-white">
             Simple by Design
           </h2>
-          <p className="text-gray-400 leading-relaxed">
-            From posting an ad to chatting with buyers, SmartX keeps everything
-            intuitive and distraction-free. No clutter, no confusion — just a
-            smooth experience.
+          <p className="text-slate-400">
+            Clean UI and easy navigation make the platform user-friendly.
           </p>
         </div>
       </section>
@@ -133,36 +137,18 @@ const AboutUs = () => {
         ref={(el) => (sectionsRef.current[5] = el)}
         className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center"
       >
-        <div className="text-indigo-500 text-7xl mx-auto md:mx-0">
-          <FaBolt />
-        </div>
+        {/* TEXT */}
         <div className="space-y-4">
           <h2 className="text-3xl font-semibold text-white">
             Fast & Efficient
           </h2>
-          <p className="text-gray-400 leading-relaxed">
-            SmartX is optimized for speed — fast browsing, quick messaging, and
-            instant discovery of nearby products so deals happen faster.
+          <p className="text-slate-400">
+            Discover products quickly and connect instantly with sellers.
           </p>
         </div>
-      </section>
 
-      {/* COMMUNITY */}
-      <section
-        ref={(el) => (sectionsRef.current[6] = el)}
-        className="max-w-5xl mx-auto text-center space-y-6"
-      >
-        <div className="flex justify-center text-indigo-500 text-6xl">
-          <FaHeart />
-        </div>
-        <h2 className="text-4xl font-semibold text-white">
-          Powered by Community
-        </h2>
-        <p className="text-gray-400 leading-relaxed text-lg">
-          SmartX is more than a marketplace — it’s a community-driven platform
-          built to empower local buyers and sellers with trust, simplicity, and
-          confidence.
-        </p>
+        {/* ICON */}
+        <IconShell Icon={LuRocket} />
       </section>
 
     </div>
