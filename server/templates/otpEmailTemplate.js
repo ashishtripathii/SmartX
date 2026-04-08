@@ -5,7 +5,7 @@ return `
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartX OTP Verification</title>
+    <title>TradeX OTP Verification</title>
     <style>
         /* Reset styles for email clients */
         body, table, td, a {
@@ -128,7 +128,7 @@ return `
                     <!-- Header -->
                     <tr>
                         <td class="header">
-                            <h1 class="logo">SmartX</h1>
+                            <h1 class="logo">TradeX</h1>
                             <p class="tagline">Intelligent Solutions for a Smarter Tomorrow</p>
                         </td>
                     </tr>
@@ -138,7 +138,7 @@ return `
                         <td class="content">
                             <h2 style="margin-top: 0;">Verify Your Identity</h2>
                           
-                            <p>You're just one step away from accessing your SmartX account. Please use the following One-Time Password (OTP) to complete your verification:</p>
+                            <p>You're just one step away from accessing your TradeX account. Please use the following One-Time Password (OTP) to complete your verification:</p>
                             
                             <div class="otp-container">
                                 <p style="margin: 0 0 10px;">Your verification code is:</p>
@@ -159,7 +159,7 @@ return `
                             </div>
                             
                             <div class="note">
-                                <strong>Security Tip:</strong> Never share your OTP with anyone. SmartX will never ask for your password or OTP via email, phone, or text message.
+                                <strong>Security Tip:</strong> Never share your OTP with anyone. TradeX will never ask for your password or OTP via email, phone, or text message.
                             </div>
                             
                             <p>Need help? <a href="[Support Link]" style="color: #667eea;">Contact our support team</a></p>
@@ -169,14 +169,14 @@ return `
                     <!-- Footer -->
                     <tr>
                         <td class="footer">
-                            <p>This email was sent by SmartX</p>
+                            <p>This email was sent by TradeX</p>
                             <p>Founded by Sourabh Tembhare</p>
                             <p>
                                 <a href="[Unsubscribe Link]" style="color: #666666;">Unsubscribe</a> | 
                                 <a href="[Privacy Policy]" style="color: #666666;">Privacy Policy</a> | 
                                 <a href="[Terms of Service]" style="color: #666666;">Terms of Service</a>
                             </p>
-                            <p>&copy; 2025 SmartX. All rights reserved.</p>
+                            <p>&copy; 2025 TradeX. All rights reserved.</p>
                         </td>
                     </tr>
                 </table>
