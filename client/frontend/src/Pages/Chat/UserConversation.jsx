@@ -7,12 +7,13 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import Loader from "../../components/Common/Loader";
 import moment from "moment";
+import { getSocketInstance } from "../../utils/socketClient";
+import ProfileAvatar from "../../components/Common/ProfileAvatar";
 
 const UserConversation = () => {
   const { token } = useSelector((state) => state.auth);
   const { userData } = useSelector((state) => state.user);
   const { allOnlineUsers } = useSelector((state) => state.socketIo);
-  const { socket } = useSelector((state) => state.socketIo);
   const location = useLocation();
   const receiverInformation = location.state;
   const [loading, setLoading] = useState(false);
@@ -109,6 +110,8 @@ const UserConversation = () => {
   }, [allMessages]);
 
   useEffect(() => {
+    const socket = getSocketInstance();
+
     const handleMessage = (data) => {
       if (data?.senderId === receiverInformation?._id) {
         setAllMessages((prev) => {
@@ -122,25 +125,23 @@ const UserConversation = () => {
     }
 
     return () => {
-      socket.off("new-message");
+      socket?.off("new-message", handleMessage);
     };
-  }, [socket]);
+  }, [receiverInformation?._id]);
 
   return (
     <div className="w-[91vw] h-[86vh]  mx-auto  my-4  bg-slate-900 rounded-md">
       {/* receiver information */}
       <div className="h-[12%] px-2 flex items-center justify-between">
         <div className="flex flex-row gap-2 items-center">
-          <div className="relative">
-            <img
-              src={receiverInformation?.profilePicture}
-              alt={`${receiverInformation?.firstName} ${receiverInformation?.lastName}Image`}
-              className="h-14 w-14 rounded-full object-cover"
-            />
-            {allOnlineUsers.includes(receiverInformation?._id) && (
-              <div className="h-4 w-4 bg-green-600 rounded-full absolute right-0 top-9"></div>
-            )}
-          </div>
+          <ProfileAvatar
+            user={receiverInformation}
+            sizeClass="h-14 w-14"
+            imageClassName="object-cover"
+            fallbackClassName="bg-gradient-to-br from-[#0f4da8] to-[#0f86d9] flex items-center justify-center font-bold text-white"
+            showStatus
+            isOnline={allOnlineUsers.includes(receiverInformation?._id)}
+          />
 
           <div>
             <p>

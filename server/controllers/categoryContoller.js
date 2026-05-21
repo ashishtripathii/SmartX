@@ -1,5 +1,7 @@
 const Category = require("../models/category");
+const Product = require("../models/product");
 const { fileUpload } = require("../utils/cloudUplod");
+const mongoose = require("mongoose");
 
 // create category
 exports.createCategory = async (req, res) => {
@@ -85,6 +87,13 @@ exports.categoryDetails = async (req, res) => {
       });
     }
 
+    if (!mongoose.Types.ObjectId.isValid(categoryId)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid category id",
+      });
+    }
+
     const categoryPageDetails = await Category.findById(categoryId).exec();
 
     if (!categoryPageDetails) {
@@ -94,11 +103,25 @@ exports.categoryDetails = async (req, res) => {
       });
     }
 
+    const categoryAllProducts = await Product.find({
+      category: categoryId,
+      isAvailable: true,
+    })
+      .populate("category", "categoryName")
+      .populate("sellerId", "firstName lastName profilePicture")
+      .sort({ createdAt: -1 })
+      .exec();
+
+    const categoryResponse = {
+      ...categoryPageDetails.toObject(),
+      categoryAllProducts,
+    };
+
     // return response
     return res.status(200).json({
       success: true,
       message: "Successfully fetched category page details",
-      categoryPageDetails: categoryPageDetails,
+      categoryPageDetails: categoryResponse,
     });
   } catch (error) {
     console.log(error);

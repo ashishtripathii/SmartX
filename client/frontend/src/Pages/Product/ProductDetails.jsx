@@ -18,6 +18,7 @@ import { IoHeart } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductToWishlist, removeProductFromWislist } from "../../redux/slices/wishlist";
 import copy from 'copy-to-clipboard';
+import ProfileAvatar from "../../components/Common/ProfileAvatar";
 
 const ProductDetails = () => {
   const {allProducts} = useSelector((state)=> state.wishlist);
@@ -162,10 +163,11 @@ const ProductDetails = () => {
 
               <div className="h-[55%]  border border-slate-600 p-2 flex flex-col gap-8 items-center  justify-center">
                 <div className="flex items-center gap-2 w-full">
-                  <img
-                    src={productDetails?.sellerId?.profilePicture}
-                    alt={`${productDetails?.sellerId?.firstName}Image`}
-                    className="h-16 w-16 rounded-full object-cover"
+                  <ProfileAvatar
+                    user={productDetails?.sellerId}
+                    sizeClass="h-16 w-16"
+                    imageClassName="object-cover"
+                    fallbackClassName="bg-gradient-to-br from-[#0f4da8] to-[#0f86d9] flex items-center justify-center font-bold text-white"
                   />
 
                   <div>

@@ -19,10 +19,10 @@ const Footer = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-3 text-white text-2xl font-bold">
             <FaStore className="text-indigo-500" />
-            Tradex
+            SmartXchange
           </div>
           <p className="text-sm leading-relaxed">
-            Tradex is a local online marketplace where users can buy and sell
+            SmartXchange is a local online marketplace where users can buy and sell
             products nearby — fast, safe, and simple.
           </p>
         </div>
@@ -87,7 +87,7 @@ const Footer = () => {
           <div className="space-y-3 text-sm">
             <p className="flex items-center gap-3">
               <FaEnvelope className="text-indigo-500" />
-              support@tradex.com
+              support@smartxchange.com
             </p>
             <p className="flex items-center gap-3">
               <FaPhoneAlt className="text-indigo-500" />
@@ -107,7 +107,7 @@ const Footer = () => {
 
       {/* BOTTOM */}
       <div className="mt-12 border-t border-slate-800 pt-6 text-center text-sm">
-        © {new Date().getFullYear()} TradeX. All rights reserved.
+        © {new Date().getFullYear()} SmartXchange. All rights reserved.
       </div>
     </footer>
   );

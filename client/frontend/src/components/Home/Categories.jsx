@@ -1,14 +1,10 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast';
-import { SwiperSlide ,Swiper} from 'swiper/react';
+import React, { useState } from 'react'
+import { SwiperSlide, Swiper } from 'swiper/react';
 import 'swiper/css';
 import { useNavigate } from 'react-router-dom';
 
-const Categories = () => {
+const Categories = ({ categories = [], loading = false }) => {
 
-    const [loading,setLoading] = useState(false);
-    const [allCategories,setAllCategories] = useState([]);
     const [failedImages, setFailedImages] = useState({});
     const navigate = useNavigate();
 
@@ -22,86 +18,65 @@ const Categories = () => {
         return `${import.meta.env.VITE_BACKEND_URL}/${imagePath.replace(/^\/+/, "")}`;
     };
 
-    const getAllCategories = async()=>{
-        try {
-            setLoading(true);
-            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/getAllCategories`);
-
-            if(!response?.data?.success){
-                throw new Error("Error occur during fetching all categories");
-            }
-            setAllCategories(response?.data?.allCategories);            
-            setLoading(false);
-            
-        } catch (error) {
-            setLoading(false);
-          console.log(error);
-          toast.error(error.response?.data?.message || "Something went wrong");
-            
-        }
-    }
-
-    useEffect(()=>{
-        getAllCategories();
-    },[]);
-
-
- 
-    
+    const visibleCategories = categories || [];
     
 
-  return (
-    <div className='mt-2 bg-slate-900 py-2'>
-        {
-            loading ? (<div className='text-center animate-bounce'>Loading...</div>) :
-            (<div className='px-20'> 
-                {
-                    allCategories.length < 1 ? (<div className='text-center'>Categories not found</div>) :
-                    (<Swiper className='flex items-center justify-between '
-                    slidesPerView={10}>{
-                        allCategories.map((category,index)=>{
-                            const imageSrc = resolveCategoryImage(category?.categoryImage);
-                            const hasImageError = failedImages[category?._id];
-                            return <SwiperSlide 
-                            key={category?._id || index}
-                            onClick={()=>{
-                                navigate("/category/"+category?._id)
-                            }}>
-                                 <div className='flex w-32 h-28  flex-col  gap-1 items-center justify-center px-4 
-                            py-2 bg-slate-800 rounded-md transition-all duration-300 hover:bg-slate-700 cursor-pointer'>
-                                {
-                                    hasImageError ? (
-                                        <div className='h-12 w-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-semibold'>
-                                            {(category?.categoryName || "C").charAt(0).toUpperCase()}
+    return (
+        <div className='mt-2 bg-slate-900 py-2'>
+            {loading ? (
+                <div className='text-center animate-bounce'>Loading...</div>
+            ) : (
+                <div className='px-4 sm:px-8 lg:px-20'>
+                    {categories.length < 1 ? (
+                        <div className='text-center'>Categories not found</div>
+                    ) : (
+                        <Swiper
+                            className='flex items-center justify-start'
+                            slidesPerView={Math.min((categories?.length) || 1, 12)}
+                            spaceBetween={14}
+                        >
+                            {visibleCategories.map((category, index) => {
+                                const imageSrc = resolveCategoryImage(category?.categoryImage);
+                                const hasImageError = failedImages[category?._id];
+
+                                return (
+                                    <SwiperSlide
+                                        key={category?._id || index}
+                                        onClick={() => {
+                                            navigate('/category/' + category?._id);
+                                        }}
+                                    >
+                                                                                <div className='flex w-40 h-32 flex-col justify-center gap-1 items-center  px-2 py-2 bg-slate-800 rounded-md transition-all duration-300 hover:bg-slate-700 cursor-pointer'>
+                                            {hasImageError ? (
+                                                                                    <div className='h-16 w-16 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-semibold'>
+                                                    {(category?.categoryName || 'C').charAt(0).toUpperCase()}
+                                                </div>
+                                            ) : (
+                                                <img
+                                                    src={imageSrc}
+                                                    alt={`${category?.categoryName} Image`}
+                                                                                                                className='h-30 w-30 object-cover rounded-md'
+                                                    onError={() => {
+                                                        setFailedImages((prev) => ({
+                                                            ...prev,
+                                                            [category?._id]: true,
+                                                        }));
+                                                    }}
+                                                />
+                                            )}
+                                                                                  <p className='w-32 text-center text-sm leading-tight'>{category?.categoryName}</p>
                                         </div>
-                                    ) : (
-                                        <img
-                                            src={imageSrc}
-                                            alt={`${category?.categoryName} Image`}
-                                            className='h-12 w-12 object-cover rounded-md'
-                                            onError={() => {
-                                                setFailedImages((prev) => ({
-                                                    ...prev,
-                                                    [category?._id]: true,
-                                                }));
-                                            }}
-                                        />
-                                    )
-                                }
-                                      <p className='w-24 text-center'>
-                                        {
-                                            category?.categoryName
-                                        }
-                                        </p> 
-                            </div>
-                            </SwiperSlide>
-                        })
-                        }</Swiper>)
-                }
-            </div>)
-        }
-    </div>
-  )
+                                    </SwiperSlide>
+                                );
+                            })}
+
+                            {/* no More tile - show all categories on home */}
+                        </Swiper>
+                    )}
+                </div>
+            )}
+        </div>
+    )
 }
 
 export default Categories

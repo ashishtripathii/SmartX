@@ -116,6 +116,11 @@ const SignUp = () => {
             onChange={changeHandler}
             name='firstName'
             className='ipF'
+            sx={{
+              '& .MuiFilledInput-input': { color: 'white' },
+              '& .MuiFormLabel-root': { color: 'white' },
+              '& .MuiFilledInput-root': { color: 'white' },
+            }}
             />
 
             <TextField type="text" 
@@ -127,6 +132,11 @@ const SignUp = () => {
             onChange={changeHandler}
             name='lastName'
               className='ipF'
+            sx={{
+              '& .MuiFilledInput-input': { color: 'white' },
+              '& .MuiFormLabel-root': { color: 'white' },
+              '& .MuiFilledInput-root': { color: 'white' },
+            }}
             />
 
            <TextField type="email" 
@@ -138,6 +148,11 @@ const SignUp = () => {
             onChange={changeHandler}
             name='email'
               className='ipF'
+            sx={{
+              '& .MuiFilledInput-input': { color: 'white' },
+              '& .MuiFormLabel-root': { color: 'white' },
+              '& .MuiFilledInput-root': { color: 'white' },
+            }}
             />
 
              <TextField type={showPassword ? "text" : "password"}
@@ -149,6 +164,11 @@ const SignUp = () => {
            onChange={changeHandler}
             name='password'
               className='ipF'
+              sx={{
+                '& .MuiFilledInput-input': { color: 'white' },
+                '& .MuiFormLabel-root': { color: 'white' },
+                '& .MuiFilledInput-root': { color: 'white' },
+              }}
               InputProps={{
                 endAdornment:(
                   <InputAdornment position="end">
@@ -175,6 +195,11 @@ const SignUp = () => {
            onChange={changeHandler}
             name='confirmPassword'
               className='ipF'
+              sx={{
+                '& .MuiFilledInput-input': { color: 'white' },
+                '& .MuiFormLabel-root': { color: 'white' },
+                '& .MuiFilledInput-root': { color: 'white' },
+              }}
                   InputProps={{
                 endAdornment:(
                   <InputAdornment position="end">
@@ -216,12 +241,12 @@ const SignUp = () => {
     
    </div>
 
-        {/* TradeX logo  */}
+        {/* SmartXchange logo  */}
          <div className='w-[50%] flex justify-center items-center'>
               <div className='relative w-[86%] h-[520px] rounded-3xl overflow-hidden border border-[#123b76] shadow-[0_18px_55px_rgba(3,10,31,0.55)]'>
                 <img
                   src="/auth_pg.png"
-                  alt="TradeX sign up visual"
+                  alt="SmartXchange sign up visual"
                   className='absolute inset-0 h-full w-full object-cover'
                 />
             

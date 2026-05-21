@@ -26,7 +26,7 @@ const LogoAnimation = () => {
     <div>
       <h1 className='font-bold flex items-center'> 
           <p className='smart text-4xl sm:text-5xl lg:text-6xl'>
-            Trade
+            SmartXchange
           </p>
 
          <p className='text-yellow-400 inline-block xLogo

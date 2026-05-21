@@ -35,6 +35,16 @@ exports.sendMessage = async (req, res) => {
       });
     }
 
+    const senderKey = String(senderId);
+    const receiverKey = String(receiverId);
+
+    conversation.unreadCounts.set(
+      receiverKey,
+      (conversation.unreadCounts.get(receiverKey) || 0) + 1,
+    );
+    conversation.unreadCounts.set(senderKey, 0);
+    await conversation.save();
+
     // create message
     const newMessage = await Message.create({
       conversationId: conversation._id,
@@ -104,6 +114,12 @@ exports.findConversation = async (req, res) => {
       });
     }
 
+    const senderKey = String(senderId);
+    if ((conversation.unreadCounts?.get(senderKey) || 0) > 0) {
+      conversation.unreadCounts.set(senderKey, 0);
+      await conversation.save();
+    }
+
     // fetch messages
     const messages = await Message.find({
       conversationId: conversation._id,
@@ -137,10 +153,20 @@ exports.chatUsers = async (req, res) => {
       .populate("members", "-password")
       .sort({ updatedAt: -1 });
 
+    const userKey = String(userId);
+    const conversationsWithUnreadCount = conversations.map((conversation) => {
+      const plainConversation = conversation.toObject();
+
+      return {
+        ...plainConversation,
+        unreadCount: conversation.unreadCounts?.get(userKey) || 0,
+      };
+    });
+
     return res.status(200).json({
       success: true,
       message: "Successfully fetched chat users",
-      conversations,
+      conversations: conversationsWithUnreadCount,
     });
   } catch (error) {
     console.log(error);

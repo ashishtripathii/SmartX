@@ -26,9 +26,10 @@ import ChatUsers from './Pages/Chat/ChatUsers'
 import UserConversation from './Pages/Chat/UserConversation'
 import {io} from "socket.io-client";
 import { useDispatch, useSelector } from 'react-redux'
-import { setAllOnlineUsers, setSocket } from './redux/slices/socket'
+import { setAllOnlineUsers } from './redux/slices/socket'
 import checkUserAuth from './checkAuth'
 import Error from './components/Common/Error'
+import { clearSocketInstance, setSocketInstance } from './utils/socketClient'
 
 
 const App = () => {
@@ -111,8 +112,8 @@ const App = () => {
           userId:userData?._id,
         }
        });
-       
-      dispatch(setSocket(socket));
+
+      setSocketInstance(socket);
 
        socket.on("all-online-users",(data)=>{
         dispatch(setAllOnlineUsers(data));
@@ -122,12 +123,13 @@ const App = () => {
        return ()=>{
         socket.disconnect();
         socket.off("all-online-users");
+        clearSocketInstance();
        }
     }
     else{
       return ;
     }
-  },[token])
+  },[token, userData?._id, dispatch])
 
   useEffect(()=>{
    const timer =  setTimeout(()=>{   

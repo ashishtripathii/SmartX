@@ -13,13 +13,17 @@ const Home = () => {
 
   const [loading,setLoading] =  useState(false);
   const [allProducts,setAllProducts] =  useState([]);
+  const [allCategories,setAllCategories] = useState([]);
+  const [categoriesLoading,setCategoriesLoading] = useState(false);
   const [page,setPage] = useState(1);
   const [lastcall,setLastcall]  = useState(false);
+  const [selectedLocation,setSelectedLocation] = useState("");
 
 
   const scrollRef = useRef(null);
 
   const slides = [
+    { imageUrl:"https://images.unsplash.com/photo-1558981403-c5f9899a28bc" },
     { imageUrl:"/home-3.webp" },
     { imageUrl:"/home-2.webp" },
     { imageUrl:"/home-1.avif" },
@@ -30,6 +34,25 @@ const Home = () => {
 
 
 
+  const getAllCategories = async () => {
+    try {
+      setCategoriesLoading(true);
+
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/getAllCategories`);
+
+      if(!response?.data?.success){
+        throw new Error("Error occur during fetching all categories");
+      }
+
+      setAllCategories(response?.data?.allCategories || []);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      setCategoriesLoading(false);
+    }
+  };
+
+
   const getAllProducts = async () => {
 
     if(lastcall || loading) return;
@@ -38,8 +61,16 @@ const Home = () => {
 
       setLoading(true);
 
+      const queryParams = new URLSearchParams({
+        page: String(page),
+      });
+
+      if (selectedLocation.trim()) {
+        queryParams.set("location", selectedLocation.trim());
+      }
+
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/get-products?page=${page}`
+        `${import.meta.env.VITE_BACKEND_URL}/get-products?${queryParams.toString()}`
       );
 
       const newProducts = response?.data?.allProducts || [];
@@ -65,7 +96,30 @@ const Home = () => {
 
   useEffect(()=>{
     getAllProducts();
-  },[page]);
+  },[page, selectedLocation]);
+
+
+  useEffect(()=>{
+    getAllCategories();
+  },[]);
+
+
+  const handleLocationChange = (event) => {
+    setSelectedLocation(event.target.value);
+    setAllProducts([]);
+    setLastcall(false);
+    setPage(1);
+    scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+
+  const clearFilters = () => {
+    setSelectedLocation("");
+    setAllProducts([]);
+    setLastcall(false);
+    setPage(1);
+    scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
 
   useEffect(() => {
@@ -99,7 +153,46 @@ const Home = () => {
     >
 
       {/* Categories */}
-      <Categories/>
+      <Categories categories={allCategories} loading={categoriesLoading} />
+      
+
+      {/* Filters */}
+      <div className='px-4 pt-4'>
+        <div className='rounded-xl border border-slate-800 bg-slate-900/90 px-3 py-3 shadow-lg'>
+          <div className='mb-2 flex flex-wrap items-center justify-between gap-2'>
+            <div>
+              <h2 className='text-base font-semibold'>Filter products</h2>
+              <p className='text-xs text-slate-400'>Browse by location</p>
+            </div>
+            <button
+              type='button'
+              onClick={clearFilters}
+              className='rounded-full border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:bg-slate-800'
+            >
+              Clear filters
+            </button>
+          </div>
+
+          <div className='grid gap-2 md:grid-cols-1'>
+            <label className='flex flex-col gap-1 text-xs font-medium text-slate-300'>
+              Location
+              <input
+                type='text'
+                value={selectedLocation}
+                onChange={handleLocationChange}
+                placeholder='Enter city or area'
+                className='rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm outline-none transition focus:border-blue-500 w-full'
+              />
+            </label>
+          </div>
+
+          {
+            categoriesLoading && (
+              <div className='mt-2 text-xs text-slate-400'>Loading categories...</div>
+            )
+          }
+        </div>
+      </div>
 
       {/* Swiper Banner */}
       <div className='mt-4 px-4'>

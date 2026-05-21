@@ -4,6 +4,8 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import Loader from "../../components/Common/Loader";
 import { useNavigate } from "react-router-dom";
+import ProfileAvatar from "../../components/Common/ProfileAvatar";
+import { getSocketInstance } from "../../utils/socketClient";
 
 const ChatUsers = () => {
   const { token } = useSelector((state) => state.auth);
@@ -43,6 +45,22 @@ const ChatUsers = () => {
     getAllConversationUsers();
   }, []);
 
+  useEffect(() => {
+    const socket = getSocketInstance();
+
+    const handleNewMessage = () => {
+      getAllConversationUsers();
+    };
+
+    if (socket) {
+      socket.on("new-message", handleNewMessage);
+    }
+
+    return () => {
+      socket?.off("new-message", handleNewMessage);
+    };
+  }, [token]);
+
   return (
     <div>
       {loading ? (
@@ -71,16 +89,14 @@ const ChatUsers = () => {
                             className="bg-slate-950 p-4 rounded-md
                                        flex gap-2 items-center cursor-pointer"
                           >
-                            <div className="relative">
-                              <img
-                                src={u?.profilePicture}
-                                alt={`${u?.firstName} ${u?.lastName}Image`}
-                                className="h-14 w-14 rounded-full object-cover"
-                              />
-                              {allOnlineUsers.includes(u?._id) && (
-                                <div className="h-4 w-4 bg-green-600 rounded-full absolute right-0 top-9"></div>
-                              )}
-                            </div>
+                            <ProfileAvatar
+                              user={u}
+                              sizeClass="h-14 w-14"
+                              imageClassName="object-cover"
+                              fallbackClassName="bg-gradient-to-br from-[#0f4da8] to-[#0f86d9] flex items-center justify-center font-bold text-white"
+                              showStatus
+                              isOnline={allOnlineUsers.includes(u?._id)}
+                            />
                             <div>
                               <p className="font-semibold">
                                 <span> {u?.firstName}</span>{" "}
@@ -92,6 +108,11 @@ const ChatUsers = () => {
                                 <p className="text-red-600">Offine</p>
                               )}
                             </div>
+                            {user?.unreadCount > 0 && (
+                              <span className="ml-auto min-w-[24px] h-[24px] px-1 rounded-full bg-red-600 text-white text-xs font-bold flex items-center justify-center">
+                                {user.unreadCount > 9 ? "9+" : user.unreadCount}
+                              </span>
+                            )}
                           </div>
                         ),
                     )}

@@ -4,7 +4,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { LuBadgeHelp } from "react-icons/lu";
 import { MdLogout } from "react-icons/md";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeToken } from '../../redux/slices/auth';
 import { setUserData } from '../../redux/slices/userData';
 import { clearWishlist } from '../../redux/slices/wishlist';
@@ -14,7 +14,7 @@ import toast from 'react-hot-toast';
 import aiLogo from "../../assets/gemini-color.png";
 import ChatboatModal from '../ChatboatModal';
 
-const UserProfileDropdown = ({setShowDropDown}) => {
+const UserProfileDropdown = ({setShowDropDown, unreadCount = 0}) => {
 
     const [open,setOpen] = useState(false);
     const [chatboat,setChatboat] = useState(false);
@@ -42,7 +42,14 @@ const UserProfileDropdown = ({setShowDropDown}) => {
       <Link to="/chat-users" className='menu-item-animated animated-lift flex items-center gap-4 text-[#c9dcf5] hover:text-white transition-colors'
         onClick={()=>{setShowDropDown(false)}}>
        <IoChatboxOutline size={25} className='text-[#36c2ff]'/>
-         <p className='font-semibold text-[18px]'>Chat</p>
+         <div className='flex items-center gap-2'>
+          <p className='font-semibold text-[18px]'>Chat</p>
+          {unreadCount > 0 && (
+            <span className='min-w-[22px] h-[22px] px-1 rounded-full bg-red-600 text-white text-xs font-bold flex items-center justify-center'>
+              {unreadCount > 9 ? "9+" : unreadCount}
+            </span>
+          )}
+         </div>
         </Link>
 
         <Link to="/settings" className='menu-item-animated animated-lift flex items-center gap-4 text-[#c9dcf5] hover:text-white transition-colors'
@@ -66,7 +73,7 @@ const UserProfileDropdown = ({setShowDropDown}) => {
          <div className='menu-item-animated animated-lift flex gap-2 items-center cursor-pointer text-[#c9dcf5] hover:text-white transition-colors'
          onClick={()=>{ setChatboat(true); }}>
             <img src={aiLogo} alt="ai" className='h-6' />
-            <p className='font-semibold text-[18px]'>TradeX Bot</p>
+            <p className='font-semibold text-[18px]'>SmartXchange Bot</p>
         </div>
 
         <div className='menu-item-animated animated-lift flex items-center gap-4 cursor-pointer text-[#c9dcf5] hover:text-white transition-colors'

@@ -46,11 +46,11 @@ const AboutUs = () => {
         className="max-w-6xl mx-auto text-center space-y-6"
       >
         <h1 className="text-5xl md:text-6xl font-bold text-white">
-          About <span className="text-indigo-500">MarketX</span>
+          About <span className="text-indigo-500">SmartXchange</span>
         </h1>
 
         <p className="text-lg text-slate-400">
-          MarketX is a modern marketplace for fast and easy local buying & selling.
+          SmartXchange is a modern marketplace for fast and easy local buying & selling.
         </p>
 
         <img

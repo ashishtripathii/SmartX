@@ -184,7 +184,7 @@ const ResetPassword = () => {
       <div className='relative w-[86%] h-[520px] rounded-3xl overflow-hidden border border-[#123b76] shadow-[0_18px_55px_rgba(3,10,31,0.55)]'>
         <img
           src="/auth_pg.png"
-          alt="TradeX reset password visual"
+          alt="SmartXchange reset password visual"
           className='absolute inset-0 h-full w-full object-cover'
         />
         <div className='relative z-10 flex h-full items-center justify-center'>

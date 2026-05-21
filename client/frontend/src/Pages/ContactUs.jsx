@@ -38,15 +38,15 @@ const ContactUs = () => {
           <FaHeadset />
         </div>
         <h1 className="text-5xl md:text-6xl font-bold text-white">
-          Contact <span className="text-indigo-500">TradeX</span>
+          Contact <span className="text-indigo-500">SmartXchange</span>
         </h1>
         <p className="text-lg text-slate-400 leading-relaxed">
           Have questions, feedback, or need help? We’re here to support you and
-          make your TradeX experience smooth and reliable.
+          make your SmartXchange experience smooth and reliable.
         </p>
         <img
           src="/contact.jpg"
-          alt="Contact TradeX support"
+          alt="Contact SmartXchange support"
           className="w-full max-w-4xl mx-auto rounded-2xl border border-slate-800 object-cover shadow-[0_16px_45px_rgba(2,6,23,0.55)]"
         />
       </section>
@@ -63,7 +63,7 @@ const ContactUs = () => {
             Reach out anytime for support or general inquiries.
           </p>
           <p className="text-indigo-400 font-medium">
-            support@tradex.com
+            support@smartxchange.com
           </p>
         </div>
 

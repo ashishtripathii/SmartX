@@ -90,7 +90,7 @@ const Login = () => {
            <Typography variant="h3" sx={{fontWeight:600}} >
                  Welcome!
                </Typography>
-                <p className='text-[14px] mt-2 text-slate-300'>Login to Trade<span className='text-yellow-400 font-semibold text-[16px]'>X</span> to continue to Trade<span className='text-yellow-400 font-semibold text-[16px]'>X</span></p>
+                <p className='text-[14px] mt-2 text-slate-300'>Login to SmartXchange to continue to SmartXchange</p>
 
 
 
@@ -107,6 +107,11 @@ const Login = () => {
                     className='inputAnimation'
                     name="email"
                     onChange={onChangeHandler}
+                    sx={{
+                      '& .MuiFilledInput-input': { color: 'white' },
+                      '& .MuiFormLabel-root': { color: 'white' },
+                      '& .MuiFilledInput-root': { color: 'white' },
+                    }}
                     />
 
                  <div className='flex flex-col'>
@@ -122,6 +127,11 @@ const Login = () => {
                     fullWidth
                     onChange={onChangeHandler}
                     className='inputAnimation'
+                    sx={{
+                      '& .MuiFilledInput-input': { color: 'white' },
+                      '& .MuiFormLabel-root': { color: 'white' },
+                      '& .MuiFilledInput-root': { color: 'white' },
+                    }}
                     InputProps={{
                       endAdornment:(
                         <InputAdornment position="end">
@@ -173,7 +183,7 @@ const Login = () => {
         <div className='relative w-[86%] h-[520px] rounded-3xl overflow-hidden border border-[#123b76] shadow-[0_18px_55px_rgba(3,10,31,0.55)]'>
           <img
             src="/auth_pg.png"
-            alt="TradeX login visual"
+            alt="SmartXchange login visual"
             className='absolute inset-0 h-full w-full object-cover'
           />
          

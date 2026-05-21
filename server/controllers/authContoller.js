@@ -1,7 +1,7 @@
 const OTP = require("../models/otp");
 const User = require("../models/user");
 const otpGenerator = require("otp-generator");
-const bacrypt = require("bcrypt");
+const bacrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { fileUpload } = require("../utils/cloudUplod");
 

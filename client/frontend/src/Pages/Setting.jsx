@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserData } from '../redux/slices/userData';
+import ProfileAvatar from '../components/Common/ProfileAvatar';
 
 const Setting = () => {
 
@@ -180,8 +181,12 @@ const Setting = () => {
         <div className='bg-slate-900 rounded-md px-2 py-4 flex gap-4 items-center'>
 
             {
-                !showFile ?  <img src={userData?.profilePicture} alt={`${userData?.firstName}Image`} 
-            className='h-20 w-20 rounded-full border border-slate-400 object-cover'/>
+                !showFile ?  <ProfileAvatar
+            user={userData}
+            sizeClass='h-20 w-20'
+            imageClassName='object-cover border border-slate-400'
+            fallbackClassName='bg-gradient-to-br from-[#0f4da8] to-[#0f86d9] flex items-center justify-center font-bold text-white border border-slate-400'
+          />
             :
             <img src={showFile} alt="selectedImage" 
             className='h-20 w-20 rounded-full object-cover border border-slate-400'/>

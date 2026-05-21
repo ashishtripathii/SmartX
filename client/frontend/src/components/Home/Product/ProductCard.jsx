@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 
 
 const ProductCard = ({product}) => {
+  const formattedPrice = new Intl.NumberFormat('en-IN').format(product?.price || 0);
    
   const {token}       = useSelector((state)=> state.auth);
   const {allProducts} = useSelector((state)=> state.wishlist);
@@ -63,7 +64,7 @@ const ProductCard = ({product}) => {
             <LuIndianRupee/>
            <p>
              {
-                product?.price
+                formattedPrice
             }
            </p>
         </div>

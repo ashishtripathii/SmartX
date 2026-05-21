@@ -11,14 +11,14 @@ import {
 
 const faqData = [
   {
-    question: "What is TradeX?",
+    question: "What is SmartXchange?",
     answer:
-      "TradeX is a local online marketplace where users can buy and sell products within their community quickly and safely.",
+      "SmartXchange is a local online marketplace where users can buy and sell products within their community quickly and safely.",
   },
   {
-    question: "Is TradeX free to use?",
+    question: "Is SmartXchange free to use?",
     answer:
-      "Yes, TradeX is completely free for browsing and posting ads. There are no hidden charges for basic usage.",
+      "Yes, SmartXchange is completely free for browsing and posting ads. There are no hidden charges for basic usage.",
   },
   {
     question: "How do I post an ad?",
@@ -28,12 +28,12 @@ const faqData = [
   {
     question: "How can I contact a seller or buyer?",
     answer:
-      "You can use TradeX's built-in chat system to communicate directly with buyers or sellers securely.",
+      "You can use SmartXchange's built-in chat system to communicate directly with buyers or sellers securely.",
   },
   {
-    question: "Is TradeX safe?",
+    question: "Is SmartXchange safe?",
     answer:
-      "TradeX promotes safe transactions by encouraging local meetups, transparent listings, and secure communication.",
+      "SmartXchange promotes safe transactions by encouraging local meetups, transparent listings, and secure communication.",
   },
 ];
 
@@ -53,15 +53,15 @@ const Help = () => {
           <FaLifeRing />
         </div>
         <h1 className="text-5xl md:text-6xl font-bold text-white">
-          TradeX <span className="text-indigo-500">Help Center</span>
+          SmartXchange <span className="text-indigo-500">Help Center</span>
         </h1>
         <p className="text-lg text-slate-400 leading-relaxed">
-          Find answers, learn how TradeX works, and get tips to buy and sell
+          Find answers, learn how SmartXchange works, and get tips to buy and sell
           safely in your local community.
         </p>
         <img
           src="/help.jpg"
-          alt="TradeX help and guidance"
+          alt="SmartXchange help and guidance"
           className="w-full max-h-[500px] rounded-2xl  object-contain shadow-[0_16px_45px_rgba(2,6,23,0.55)]"
         />
       </section>
@@ -75,7 +75,7 @@ const Help = () => {
           </h2>
           <p className="text-slate-400 leading-relaxed">
             Create an account, complete your profile, and start browsing or
-            posting ads. TradeX is designed to be simple and beginner-friendly.
+            posting ads. SmartXchange is designed to be simple and beginner-friendly.
           </p>
         </div>
       </section>
@@ -102,7 +102,7 @@ const Help = () => {
             Chat & Communication
           </h2>
           <p className="text-slate-400 leading-relaxed">
-            Communicate securely using TradeX chat. Avoid sharing personal
+            Communicate securely using SmartXchange chat. Avoid sharing personal
             information and always stay respectful.
           </p>
         </div>

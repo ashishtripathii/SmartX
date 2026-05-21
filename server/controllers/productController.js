@@ -2,6 +2,7 @@ const User = require("../models/user");
 const Product = require("../models/product");
 const Category = require("../models/category");
 const { fileUpload } = require("../utils/cloudUplod");
+const mongoose = require("mongoose");
 
 // upload product
 exports.uploadProduct = async (req, res) => {
@@ -122,11 +123,32 @@ exports.homePageProducts = async (req, res) => {
   try {
     const page = Number(req.query.page) || 1;
     const limit = 12;
+    const { categoryId, location } = req.query;
 
     const skip = (page - 1) * limit;
 
+    const filter = {
+      isAvailable: true,
+    };
+
+    if (categoryId) {
+      if (!mongoose.Types.ObjectId.isValid(categoryId)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid category id",
+        });
+      }
+
+      filter.category = categoryId;
+    }
+
+    if (location?.trim()) {
+      const safeLocation = location.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      filter.location = { $regex: safeLocation, $options: "i" };
+    }
+
     // fetch products
-    const allProducts = await Product.find({})
+    const allProducts = await Product.find(filter)
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit);

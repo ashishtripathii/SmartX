@@ -8,13 +8,16 @@ const conversationSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-
     lastMessage: {
       type: String,
     },
-
     lastMessageTime: {
       type: Date,
+    },
+    unreadCounts: {
+      type: Map,
+      of: Number,
+      default: {},
     },
   },
   { timestamps: true },

@@ -25,7 +25,7 @@ const Error = () => {
         {/* DESC */}
         <p className="text-slate-400 mb-10 leading-relaxed">
           Oops! The page you're looking for doesn't exist or has been moved.
-          Let's get you back to TradeX marketplace.
+          Let's get you back to SmartXchange marketplace.
         </p>
 
         {/* BUTTONS */}
@@ -51,7 +51,7 @@ const Error = () => {
 
         {/* EXTRA TEXT */}
         <div className="mt-16 text-sm text-slate-500">
-          Need help? Contact TradeX support anytime.
+          Need help? Contact SmartXchange support anytime.
         </div>
       </div>
     </div>
